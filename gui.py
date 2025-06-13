@@ -1,47 +1,39 @@
-import dearpygui.dearpygui as dpg
-from core import constants
-from ui import main_window, config_window, misc_tools_window  # Import misc_tools_window
+# gui.py
 
+import tkinter as tk
+from tkinter import messagebox
+from ui import main_window, config_window, misc_tools_window
 
-def create_log_window(y_pos: int):
-    """Creates the log window at the bottom of the application, initially collapsed."""
-    with dpg.window(label="Log Output", tag="log_window", pos=(0, y_pos), width=700, height=200, collapsed=True):
-        dpg.add_text("Application log will appear here...", tag="log_text", wrap=680)
+# The unused 'AppState' import has been removed to break the circular dependency.
 
-
-def start_gui(config: dict, is_token_valid: bool, status_message: str):
+def start_gui(config, is_token_valid, status_message):
     """
-    Creates the Dear PyGui context and manages the main application loop.
+    Initializes and runs the main Tkinter GUI.
+
+    Args:
+        config (dict): The application configuration.
+        is_token_valid (bool): The initial validity status of the token.
+        status_message (str): The initial status message to display.
     """
-    dpg.create_context()
-    dpg.create_viewport(title=constants.APP_TITLE, width=700, height=620)
+    try:
+        # MainWindow creates its own instance of AppState, so we don't need it here.
+        root = main_window.MainWindow(config, is_token_valid, status_message)
 
-    dpg.setup_dearpygui()
-    dpg.show_viewport()
+        # You can add a menu item or button in the MainWindow class to open the misc tools.
+        # For example, inside the MainWindow class in main_window.py, you could have a method:
+        #
+        # def open_misc_tools(self):
+        #     misc_win = misc_tools_window.MiscToolsWindow(self, self.app_state)
+        #     misc_win.grab_set()
+        #
+        # And a button:
+        # misc_button = ttk.Button(self, text="Open Misc Tools", command=self.open_misc_tools)
+        # misc_button.pack(pady=10)
 
-    viewport_height = dpg.get_viewport_height()
-    collapsed_height_estimate = 25
-    log_window_y_pos = viewport_height - collapsed_height_estimate
+        root.mainloop()
 
-    # Create all application windows
-    config_window.create_config_window(config)
-    main_window.create_main_window(config, status_message)
-    create_log_window(log_window_y_pos)
-
-    # Create misc_tools_window once on startup, keep it hidden initially
-    misc_tools_window.create_misc_tools_window(
-        config=config,
-        log_callback=main_window.log_message,  # Pass main_window's module-level log_message
-        fetch_hubs_callback=main_window.fetch_hubs_callback  # Pass main_window's module-level fetch_hubs_callback
-    )
-    dpg.configure_item("misc_tools_window", show=False)
-
-    if is_token_valid:
-        dpg.configure_item("main_window", show=True)
-        dpg.set_primary_window("main_window", True)
-    else:
-        dpg.configure_item("config_window", show=True)
-        dpg.set_primary_window("config_window", True)
-
-    dpg.start_dearpygui()
-    dpg.destroy_context()
+    except Exception as e:
+        # Fallback for critical GUI errors
+        messagebox.showerror("Fatal Error", f"A critical error occurred and the application must close: {e}")
+        import traceback
+        traceback.print_exc()
