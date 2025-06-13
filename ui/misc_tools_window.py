@@ -4,14 +4,14 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import logging
 
-from core.app_state import AppState
-from utils import alation_lookup, api_client
+from core.app_state import app_state # CORRECTED: Import lowercase 'app_state'
+from utils import alation_lookup
 from utils.processing_utils import process_hub_and_folders
 
 logger = logging.getLogger(__name__)
 
 class MiscToolsWindow(tk.Toplevel):
-    def __init__(self, parent, app_state: AppState):
+    def __init__(self, parent, app_state: app_state): # CORRECTED: Use lowercase 'app_state' for type hint
         super().__init__(parent)
         self.title("Miscellaneous Tools")
         self.geometry("600x400")
@@ -79,11 +79,9 @@ class MiscToolsWindow(tk.Toplevel):
             messagebox.showwarning("Selection Required", "Please select a Document Hub first.")
             return
 
-        # Get hub details to find its title for the folder name
         hub_details = alation_lookup.get_hub_details(self.config, hub_id, log_callback=self.log_callback)
         hub_title = hub_details.get('title', f"Hub_{hub_id}")
 
-        # Ask for a directory to save the output
         output_dir = filedialog.askdirectory(
             title="Select Directory to Save Hub Structure",
             initialdir="."
@@ -97,7 +95,6 @@ class MiscToolsWindow(tk.Toplevel):
         self.process_button['state'] = 'disabled'
 
         try:
-            # This function will now handle fetching folders and creating the structure
             process_hub_and_folders(
                 self.config,
                 hub_id,
