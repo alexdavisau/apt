@@ -88,9 +88,12 @@ def fetch_hubs_callback():
     dpg.configure_item("fetch_button", enabled=True)
 
 
-# Other callbacks remain nested for now, as they rely on config parameter
-# which is part of the create_main_window closure.
-# This keeps the changes minimal to directly address the error.
+# ADD THIS NEW HELPER FUNCTION (if you're using the menu bar item)
+def _show_and_refresh_misc_tools():
+    """Helper function to show the misc tools window and refresh its data."""
+    dpg.configure_item("misc_tools_window", show=True)
+    misc_tools_window.refresh_misc_data_and_combos(None, None)
+
 
 def create_main_window(config: dict, status_message: str):
     global _main_window_config_global
@@ -469,21 +472,25 @@ def create_main_window(config: dict, status_message: str):
             dpg.configure_item("upload_button", enabled=True)
             log_message("Upload process finished (check logs for details).")
 
-    # Callback for creating empty documents - This function is now defined in misc_tools_window.py
-    # and called from there. The logic below is an old placeholder if it was in main_window.
-    # def create_empty_documents_callback():
-    #    pass # This function is moved
-
     # Callback for opening the misc tools window
     def open_misc_tools_callback():
         dpg.show_item("misc_tools_window")
         # Trigger refresh of its internal combos when shown
-        misc_tools_window.refresh_misc_data_and_combos()
+        # FIX APPLIED HERE
+        misc_tools_window.refresh_misc_data_and_combos(None, None)
 
     with dpg.window(label="Main Window", tag="main_window", show=False):
+        # Viewport Menu Bar for settings and tools
+        with dpg.viewport_menu_bar():
+            with dpg.menu(label="File"):
+                dpg.add_menu_item(label="Settings", callback=show_config)
+            with dpg.menu(label="Tools"):
+                dpg.add_menu_item(label="Miscellaneous Tools", callback=_show_and_refresh_misc_tools)
+
+        dpg.add_separator()
+
         with dpg.group(horizontal=True):
             dpg.add_text(status_message, tag="status_text")
-            dpg.add_button(label="Settings", callback=show_config)
 
         dpg.add_separator()
 
@@ -511,6 +518,7 @@ def create_main_window(config: dict, status_message: str):
 
         dpg.add_separator()
 
+        # This button is now redundant if using the menu bar, but we'll leave it and its callback fixed
         dpg.add_button(label="Open Other Tools", callback=open_misc_tools_callback)
 
         with dpg.file_dialog(directory_selector=False, show=False, callback=file_selected_callback, id="file_dialog_id",

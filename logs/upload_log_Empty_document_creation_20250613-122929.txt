@@ -1,0 +1,8 @@
+--- Empty document creation Log ---
+Timestamp: 20250613-122929
+Total documents prepared: 1
+Successfully uploaded: 0
+Failed uploads: 1
+
+--- Individual Upload Results / Details ---
+FAILED: Empty document creation - 400 - {"job_id":null,"invalid_documents":[{"index":0,"errors":[{"template_id":["The following (doc_hub_id: 29) doesn't match with the (template_id: 214)"]}],"document":{"title":"New Document via APT #1","document_hub_id":29,"parent_folder_id":119,"template_id":214,"description":"","custom_fields":[]}}]}
