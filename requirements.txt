@@ -1,0 +1,4 @@
+dearpygui>=1.11
+requests
+pandas
+openpyxl

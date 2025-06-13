@@ -1,0 +1,11 @@
+--- Upload Log for /Users/alex.davis/PycharmProjects/dhub/CDE_template_ID_155.xlsx ---
+Timestamp: 20250612-105720
+Target Hub ID: 1
+Target Folder ID: 3
+Template: CDE (ID: 155)
+Total rows processed: 1
+Successfully uploaded: 0
+Failed uploads: 1
+
+--- Individual Upload Results ---
+FAILED: 'test' - 500 - {"detail":"'dict' object has no attribute 'index'","code":"500000"}

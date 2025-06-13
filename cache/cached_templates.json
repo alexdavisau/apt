@@ -1,0 +1,7339 @@
+[
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10232,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "AAv2 Runbook Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10368,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Curation Groupings",
+        "name_singular": "Curation Grouping",
+        "backref_name": "Curation Group Member",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10369,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Curation Master",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 104,
+    "layout_otype": 27,
+    "title": "AAv2 Template",
+    "visual_config_id": 753
+  },
+  {
+    "builtin_name": null,
+    "fields": [],
+    "id": 36,
+    "layout_otype": 0,
+    "title": "Alation Analytics",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 10084,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "Select the source system for the report",
+        "name_plural": "Source Systems",
+        "name_singular": "Source System",
+        "backref_name": "Reports associated with",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "article"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10041,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms",
+        "name_singular": "Related Term",
+        "backref_name": "Related Content",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10289,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Playbook",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 47,
+    "layout_otype": 0,
+    "title": "Alation Onboarding",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10040,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Contains PII",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Unknown",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10390,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Source Columns",
+        "name_singular": "Source Column",
+        "backref_name": "Related Terms",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10089,
+        "field_type": "PICKER",
+        "tooltip_text": "This field identifies the categorization of this data element as PCI in accordance with our business Credit policies.",
+        "name_plural": "",
+        "name_singular": "PCI (Personal Credit Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "\ud83d\udd34 PCI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "\ud83d\udfe2 No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 62,
+    "layout_otype": 96,
+    "title": "Alation Term",
+    "visual_config_id": 860
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 10055,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "BI Hidden Links",
+        "name_singular": "BI Hidden Links",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 55,
+    "layout_otype": 0,
+    "title": "BI Column Definition",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10451,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Bot Managers",
+        "name_singular": "Bot Manager",
+        "backref_name": "Manager of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 246,
+    "layout_otype": 93,
+    "title": "Bot Policy",
+    "visual_config_id": 971
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 10056,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "Features (BU)",
+        "name_singular": "Features (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Broken Links",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "External Links",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Asynchronous",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Empty Cols",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Include Private",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10058,
+        "field_type": "DATE",
+        "tooltip_text": null,
+        "name_plural": "Start Date (BU)",
+        "name_singular": "Start Date (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10059,
+        "field_type": "DATE",
+        "tooltip_text": null,
+        "name_plural": "End Date (BU)",
+        "name_singular": "End Date (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10061,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "1 - Download",
+        "name_singular": "1 - Download",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10063,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "3 - Admin",
+        "name_singular": "3 - Admin",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10057,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "Output Format (BU)",
+        "name_singular": "Output Format (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "CSV-UTF8",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "XLSX",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10062,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "2 - Upload",
+        "name_singular": "2 - Upload",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10060,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "Desired Template (BU)",
+        "name_singular": "Desired Template (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Alation Onboarding",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "BI Column Definition",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Business Articles",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Data Contract",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Dataset Testing",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "Datasets",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "Enablement Guide",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 6
+          },
+          {
+            "title": "Person Definition",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 7
+          },
+          {
+            "title": "TEST",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 8
+          },
+          {
+            "title": "Team Pages",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 9
+          },
+          {
+            "title": "default",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 10
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 54,
+    "layout_otype": 0,
+    "title": "Bulk Utility (BU)",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": "business_glossary",
+    "fields": [
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      }
+    ],
+    "id": 26,
+    "layout_otype": 0,
+    "title": "Business Articles",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10011,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Provides a written reason why this policy exists",
+        "name_plural": "",
+        "name_singular": "Why this Policy",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10012,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "This is the specific details of a policy",
+        "name_plural": "",
+        "name_singular": "Statement of Policy",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10014,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "This field holds any free-form links to other policy documents outside of Alation, such as Policy Software or other sources of information",
+        "name_plural": "",
+        "name_singular": "Policy Links",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10020,
+        "field_type": "DATE",
+        "tooltip_text": "The date the legal review was completed",
+        "name_plural": "",
+        "name_singular": "Legal Review Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10024,
+        "field_type": "DATE",
+        "tooltip_text": "The date the policy passed business review",
+        "name_plural": "",
+        "name_singular": "Policy Business Review Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10019,
+        "field_type": "PICKER",
+        "tooltip_text": "What is the status of this policy?",
+        "name_plural": "",
+        "name_singular": "Policy Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "WIP",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "In Business Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "In Legal Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Implementing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Active",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "Cancelled",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "Deprecated",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10194,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Custom Policy",
+        "name_singular": "Custom Policies",
+        "backref_name": "Tables effected",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "data",
+          "schema",
+          "table",
+          "attribute",
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10022,
+        "field_type": "DATE",
+        "tooltip_text": "Next Quarterly review date",
+        "name_plural": "",
+        "name_singular": "Next Business Review Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10017,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "For policies that relate to a table, list them here",
+        "name_plural": "Objects for Policy",
+        "name_singular": "Object for Policy",
+        "backref_name": "Applicable Policies",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table",
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10344,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "DQ Rules and Controls",
+        "name_singular": "DQ Rules and Controls",
+        "backref_name": "DQ Rules of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 57,
+    "layout_otype": 93,
+    "title": "Business Policy",
+    "visual_config_id": 710
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 117,
+    "layout_otype": 96,
+    "title": "Business Rule",
+    "visual_config_id": 472
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10380,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Terms",
+        "name_singular": "Term",
+        "backref_name": "Associated Acronym",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10040,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Contains PII",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Unknown",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 77,
+    "layout_otype": 96,
+    "title": "Business Term",
+    "visual_config_id": 799
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10312,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "L2 Data Taxonomy Classification",
+        "name_singular": "L2 Data Taxonomy Classifications",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Customer - Public Information",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Customer - Internal Restricted",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Customer - Regulatory Restricted",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10313,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "L3 Data Taxonomy Classifications",
+        "name_singular": "L3 Data Taxonomy Classification",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Customer - 2.1.1 Public Communications",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Customer - 2.2.1 Customer Preferences and Profile Data",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Customer - 2.3.1. Personally Identifiable Information (PII)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Partner - 3.3.1 Personally Identifiable Information (PII)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10316,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Bank Required Retention Period",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "3 months",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "6 years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "5 years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10311,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "L1 Data Taxonomy Classifications",
+        "name_singular": "L1 Data Taxonomy Classification",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Corporate",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Customer",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Partner",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10314,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Statutory Retention Period",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "2 Years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "2 years from final disposition of investigation",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "25 months",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "3 years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "5 Years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "5 years after closing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "7 Years",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10317,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Applicable Statutes",
+        "name_singular": "Applicable Statute",
+        "backref_name": "Statute Applies to",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_v3",
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 145,
+    "layout_otype": 96,
+    "title": "Business Term",
+    "visual_config_id": 604
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 98,
+    "layout_otype": 96,
+    "title": "Calculation",
+    "visual_config_id": 396
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 189,
+    "layout_otype": 96,
+    "title": "Calendar",
+    "visual_config_id": 773
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10040,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Contains PII",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Unknown",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10233,
+        "field_type": "DATE",
+        "tooltip_text": "The last date this was audited",
+        "name_plural": "",
+        "name_singular": "Last Audit Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10264,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "CDE Owner",
+        "name_singular": "CDE Owners",
+        "backref_name": "CDE Owner of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10390,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Source Columns",
+        "name_singular": "Source Column",
+        "backref_name": "Related Terms",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10391,
+        "field_type": "PICKER",
+        "tooltip_text": "The tier of the CDE within our organisation",
+        "name_plural": "",
+        "name_singular": "CDE Tier",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Tier 1",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Tier 2",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Tier 3",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10089,
+        "field_type": "PICKER",
+        "tooltip_text": "This field identifies the categorization of this data element as PCI in accordance with our business Credit policies.",
+        "name_plural": "",
+        "name_singular": "PCI (Personal Credit Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "\ud83d\udd34 PCI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "\ud83d\udfe2 No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10392,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "CDE Source",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Critical Business Process",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Regulatory Report",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10393,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Data Asset Type",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Metric",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Attribute",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Physical",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 211,
+    "layout_otype": 96,
+    "title": "CDE",
+    "visual_config_id": 966
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10264,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "CDE Owner",
+        "name_singular": "CDE Owners",
+        "backref_name": "CDE Owner of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10327,
+        "field_type": "PICKER",
+        "tooltip_text": "Critical Data Element",
+        "name_plural": "",
+        "name_singular": "CDE",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 238,
+    "layout_otype": 96,
+    "title": "CDE",
+    "visual_config_id": 954
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10264,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "CDE Owner",
+        "name_singular": "CDE Owners",
+        "backref_name": "CDE Owner of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10327,
+        "field_type": "PICKER",
+        "tooltip_text": "Critical Data Element",
+        "name_plural": "",
+        "name_singular": "CDE",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 155,
+    "layout_otype": 96,
+    "title": "CDE",
+    "visual_config_id": 702
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 207,
+    "layout_otype": 96,
+    "title": "CDE",
+    "visual_config_id": 842
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 127,
+    "layout_otype": 96,
+    "title": "CDE Template",
+    "visual_config_id": 524
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10076,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "How this metric is measured and created.",
+        "name_plural": "",
+        "name_singular": "Calculation",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10043,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Metrics",
+        "name_singular": "Related Metric",
+        "backref_name": "Report reference",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10174,
+        "field_type": "PICKER",
+        "tooltip_text": "Primarily used for BI reports/dashboards. See this article for more details: https://northstar.alationproserv.com/article/223/",
+        "name_plural": "",
+        "name_singular": "Certification Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Bronze",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Silver",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Gold",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10287,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Data Quality Rule",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10379,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "Hi I am a tooltip popup",
+        "name_plural": "Data Sources",
+        "name_singular": "Data Source",
+        "backref_name": "Old Data",
+        "backref_tooltip_text": "This is the original datasource",
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "data"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 106,
+    "layout_otype": 96,
+    "title": "CDE Template - Marianne",
+    "visual_config_id": 898
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 134,
+    "layout_otype": 96,
+    "title": "Custom Field FAQ's",
+    "visual_config_id": 626
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 10200,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "Data product owner",
+        "name_plural": "Product Owners",
+        "name_singular": "Product Owner",
+        "backref_name": "Product owner of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10088,
+        "field_type": "PICKER",
+        "tooltip_text": "This identifies if this data is categorized as Protected Health Information in alignment with HIPAA",
+        "name_plural": "",
+        "name_singular": "PHI (Protected Health Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "PHI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10201,
+        "field_type": "PICKER",
+        "tooltip_text": "Identifies how often the data is reprocessed, updated, dropped, and reloaded.",
+        "name_plural": "",
+        "name_singular": "Data Refresh SLA",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Less than hourly",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Hourly",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Daily",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Weekly",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Monthly",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10167,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Tables for Processes",
+        "name_singular": "Tables for Processes",
+        "backref_name": "ROPA Policies for Table",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10199,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": "This is who will be using the data product.",
+        "name_plural": "Addressable Markets",
+        "name_singular": "Address Market",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "External",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Internal",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10202,
+        "field_type": "PICKER",
+        "tooltip_text": "Indicates the how often the data gets used.",
+        "name_plural": "",
+        "name_singular": "Regular Consumption",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Ten minutes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "30 minutes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "1 hour",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "1 day",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "1 week",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "1 month",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "3 months",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          },
+          {
+            "title": "6 months",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 7
+          },
+          {
+            "title": "1 year",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 8
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10034,
+        "field_type": "PICKER",
+        "tooltip_text": "This holds the industry standard classification for data use/sharing of (Public, Private, Internal, Confidential, Restricted)",
+        "name_plural": "",
+        "name_singular": "Classification",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Public",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Private",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Internal",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Confidential",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Restricted",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10087,
+        "field_type": "PICKER",
+        "tooltip_text": "This field holds detail on PII setting",
+        "name_plural": "",
+        "name_singular": "PII (Personally Identifiable Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "PII",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "\u6d4b\u8bd5",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10089,
+        "field_type": "PICKER",
+        "tooltip_text": "This field identifies the categorization of this data element as PCI in accordance with our business Credit policies.",
+        "name_plural": "",
+        "name_singular": "PCI (Personal Credit Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "\ud83d\udd34 PCI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "\ud83d\udfe2 No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 74,
+    "layout_otype": 0,
+    "title": "Data Contract",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 199,
+    "layout_otype": 97,
+    "title": "Data Contract",
+    "visual_config_id": 866
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10384,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Columns",
+        "name_singular": "Related Column",
+        "backref_name": "Terms",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 200,
+    "layout_otype": 96,
+    "title": "Data Element",
+    "visual_config_id": 865
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10217,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Data Handling Policy (Reference)",
+        "backref_name": "DH Table (Ref)",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10040,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Contains PII",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Unknown",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10066,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "The table listed is related to the object we are viewing.",
+        "name_plural": "Related Tables",
+        "name_singular": "Related Table",
+        "backref_name": "Related Dataset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10400,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "The formula or logic used to derive the KPI value, including any specific filters, timeframes, or aggregation methods.",
+        "name_plural": "Calculation Method",
+        "name_singular": "Calculation Methods",
+        "backref_name": "Unreal University Glossary",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10418,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Datagen Related Data Policies",
+        "name_singular": "Datagen Related Data Policy",
+        "backref_name": "Datagen Related Term",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 226,
+    "layout_otype": 96,
+    "title": "Datagen KPI Glossary Term",
+    "visual_config_id": 951
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 7,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "People interested in",
+        "name_singular": "Interested person",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 9,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "People working on",
+        "name_singular": "Person working on",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10217,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Data Handling Policy (Reference)",
+        "backref_name": "DH Table (Ref)",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10048,
+        "field_type": "PICKER",
+        "tooltip_text": "citibike.public.alation_tag_test",
+        "name_plural": "",
+        "name_singular": "ALATION_TAG_TEST",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [],
+        "builtin_name": null
+      },
+      {
+        "id": 10049,
+        "field_type": "PICKER",
+        "tooltip_text": "citibike.public.classification",
+        "name_plural": "",
+        "name_singular": "CLASSIFICATION",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [],
+        "builtin_name": null
+      },
+      {
+        "id": 10050,
+        "field_type": "PICKER",
+        "tooltip_text": "citibike.public.sensitivity",
+        "name_plural": "",
+        "name_singular": "SENSITIVITY",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [],
+        "builtin_name": null
+      },
+      {
+        "id": 10065,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "System of Record",
+        "backref_name": "Related Term",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10085,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Service Now Request",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10088,
+        "field_type": "PICKER",
+        "tooltip_text": "This identifies if this data is categorized as Protected Health Information in alignment with HIPAA",
+        "name_plural": "",
+        "name_singular": "PHI (Protected Health Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "PHI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10066,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "The table listed is related to the object we are viewing.",
+        "name_plural": "Related Tables",
+        "name_singular": "Related Table",
+        "backref_name": "Related Dataset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10252,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Restricted Data",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10224,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Safety Flag",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10255,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "SEVERITY",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "1",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "2",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10258,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "DO-NOT-SHARE",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "NO",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10041,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms",
+        "name_singular": "Related Term",
+        "backref_name": "Related Content",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10246,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "RS Policies",
+        "name_singular": "RS Policy1",
+        "backref_name": "Related Data",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10256,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "ML-USE",
+        "name_singular": "ML-USE",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "5",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "23",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "107",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "85",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10087,
+        "field_type": "PICKER",
+        "tooltip_text": "This field holds detail on PII setting",
+        "name_plural": "",
+        "name_singular": "PII (Personally Identifiable Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "PII",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "\u6d4b\u8bd5",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10254,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "KEEP UNTIL",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "36",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10257,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "INFO-SEC",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "In-Confidence",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10234,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Technical Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10259,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Materials",
+        "name_singular": "Related Material",
+        "backref_name": "Related Data Objects",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy",
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10089,
+        "field_type": "PICKER",
+        "tooltip_text": "This field identifies the categorization of this data element as PCI in accordance with our business Credit policies.",
+        "name_plural": "",
+        "name_singular": "PCI (Personal Credit Information)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "\ud83d\udd34 PCI",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "\ud83d\udfe2 No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10039,
+        "field_type": "PICKER",
+        "tooltip_text": "This field Identifies if the data element is defined as being a Critical Data Element (CDE)",
+        "name_plural": "",
+        "name_singular": "CDE (Critical Data Element)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Needs Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10386,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Data Domain",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Customer Data",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Claims Data",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Policy Data",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Financial Data",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Medical Records",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10372,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms Test MF",
+        "name_singular": "Terms",
+        "backref_name": "Related",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 122,
+    "layout_otype": 27,
+    "title": "Data Lake Template",
+    "visual_config_id": 814
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10269,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Business Guidance",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 137,
+    "layout_otype": 93,
+    "title": "Data Retention Policy",
+    "visual_config_id": 650
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      },
+      {
+        "id": 6,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is an SME in this particular filed",
+        "name_plural": "Experts",
+        "name_singular": "Expert",
+        "backref_name": "Expert in",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10044,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Data",
+        "name_singular": "Related Data",
+        "backref_name": "Related Business Terms",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "data",
+          "schema",
+          "table",
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10041,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms",
+        "name_singular": "Related Term",
+        "backref_name": "Related Content",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 50,
+    "layout_otype": 0,
+    "title": "Datasets",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10066,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "The table listed is related to the object we are viewing.",
+        "name_plural": "Related Tables",
+        "name_singular": "Related Table",
+        "backref_name": "Related Dataset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 58,
+    "layout_otype": 0,
+    "title": "Dataset Testing",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 121,
+    "layout_otype": 93,
+    "title": "Data Sharing",
+    "visual_config_id": 651
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10230,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "DCMM Pillar",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Data Search & Discovery",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Data Leadership",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Data Governance",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Data Literacy",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 103,
+    "layout_otype": 96,
+    "title": "DCMM Topic",
+    "visual_config_id": 627
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10421,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Data Related to Projects",
+        "name_singular": "Data Related to Projects",
+        "backref_name": "Related Project",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "data",
+          "schema",
+          "table",
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10422,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Source Data",
+        "name_singular": "Source Data",
+        "backref_name": "Related Project",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "data",
+          "schema",
+          "table",
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 232,
+    "layout_otype": 96,
+    "title": "Default Project Template",
+    "visual_config_id": 919
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10252,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Restricted Data",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10358,
+        "field_type": "DATE",
+        "tooltip_text": "When the event actually occured",
+        "name_plural": "",
+        "name_singular": "Aviation / Event  Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10365,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Report Components",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10359,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Where is the data coming from and process to determine",
+        "name_plural": "",
+        "name_singular": "Data Source",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10362,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Percent Complete",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "10%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "20%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "30%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "50%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "80%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "100%",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10355,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Certified for Media",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Approved",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Needs Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10360,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Gap Analysis - Data Quality Narrative - % Complete",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10363,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Access Request",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10356,
+        "field_type": "DATE",
+        "tooltip_text": "When data will be reflected in the report",
+        "name_plural": "",
+        "name_singular": "Scheduled Refresh",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10364,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Report Purpose",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 170,
+    "layout_otype": 96,
+    "title": "Deployment Report Analysis",
+    "visual_config_id": 736
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10097,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Address of Identifiable Entity for ROPA or related business activity",
+        "name_plural": "",
+        "name_singular": "Address Line 1",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 120,
+    "layout_otype": 96,
+    "title": "DE Temp",
+    "visual_config_id": 477
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 214,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 855
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 216,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 867
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 124,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 518
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 167,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 727
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 188,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 772
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 126,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 520
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10373,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Widgets",
+        "name_singular": "Related Widget",
+        "backref_name": "Widget related to",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10374,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Widget Owners",
+        "name_singular": "Widget Owner",
+        "backref_name": "Owns Widgets",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10375,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "First Widget",
+        "backref_name": "First Widget for",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 191,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 781
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 133,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 544
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 185,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 768
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 149,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 668
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 141,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 598
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 169,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 732
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 151,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 671
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 144,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 602
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 182,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 765
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10200,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "Data product owner",
+        "name_plural": "Product Owners",
+        "name_singular": "Product Owner",
+        "backref_name": "Product owner of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10441,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Key Use Cases",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10442,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Business Value",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10443,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Included Data Elements",
+        "name_singular": "Included Data Elements",
+        "backref_name": "Data Product",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "schema",
+          "table"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10444,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Primary Users / Consumers",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10445,
+        "field_type": "PICKER",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Update Frequency",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Real-time event based",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Daily Batch Load",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Manual Updates",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10446,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Known Limitations",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10447,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Data Products",
+        "name_singular": "Related Data Products",
+        "backref_name": "Related Data Products",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 93,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 964
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 161,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 719
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 175,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 751
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 237,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 953
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 157,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 714
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10076,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "How this metric is measured and created.",
+        "name_plural": "",
+        "name_singular": "Calculation",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10034,
+        "field_type": "PICKER",
+        "tooltip_text": "This holds the industry standard classification for data use/sharing of (Public, Private, Internal, Confidential, Restricted)",
+        "name_plural": "",
+        "name_singular": "Classification",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Public",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Private",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Internal",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Confidential",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Restricted",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10244,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Executive Sponsors",
+        "name_singular": "Executive Sponsor",
+        "backref_name": "Executive Sponsor of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10041,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms",
+        "name_singular": "Related Term",
+        "backref_name": "Related Content",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 102,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 640
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10342,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Measures",
+        "name_singular": "Measure",
+        "backref_name": "Measure of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 82,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 701
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 100,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 416
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 197,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 798
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 209,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 844
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 231,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 916
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 95,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 385
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10077,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "This section can hold attachments",
+        "name_plural": "",
+        "name_singular": "Attachments",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 88,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 386
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 97,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 389
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 172,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 742
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 91,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 485
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 113,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 467
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 164,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 723
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 115,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 469
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 206,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 841
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 203,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 836
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 195,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 794
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      }
+    ],
+    "id": 130,
+    "layout_otype": 96,
+    "title": "Document",
+    "visual_config_id": 537
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 176,
+    "layout_otype": 97,
+    "title": "Domain",
+    "visual_config_id": 757
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10293,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "DQ Objects",
+        "name_singular": "DQ Object",
+        "backref_name": "DQ Objects",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 136,
+    "layout_otype": 96,
+    "title": "DQ",
+    "visual_config_id": 628
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10019,
+        "field_type": "PICKER",
+        "tooltip_text": "What is the status of this policy?",
+        "name_plural": "",
+        "name_singular": "Policy Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "WIP",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "In Business Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "In Legal Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Implementing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Active",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "Cancelled",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "Deprecated",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10329,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Attestation User",
+        "name_singular": "Attestation User",
+        "backref_name": "Controller of",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10330,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Verification Steps",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10042,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Columns for Policy",
+        "name_singular": "Column for Policy",
+        "backref_name": "Policies for Column",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "attribute"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10331,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "For each of the of the verification steps document compliance.",
+        "name_plural": "",
+        "name_singular": "Verification Results",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10332,
+        "field_type": "DATE",
+        "tooltip_text": "Last performed attestation",
+        "name_plural": "",
+        "name_singular": "Control Review Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10333,
+        "field_type": "DATE",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Next Control Review Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 56,
+    "layout_otype": 93,
+    "title": "DQ Policy",
+    "visual_config_id": 681
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 10021,
+        "field_type": "DATE",
+        "tooltip_text": "The date the policy was retired/ended/archived",
+        "name_plural": "",
+        "name_singular": "Deprecated Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10079,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Business Definition",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10008,
+        "field_type": "PICKER",
+        "tooltip_text": "The function that this policy is owned by",
+        "name_plural": "",
+        "name_singular": "Business Function",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Finance",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Billing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Manufacturing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Logistics",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "HR",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "Sourcing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "IT",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          },
+          {
+            "title": "Marketing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 7
+          },
+          {
+            "title": "All Functions",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 8
+          },
+          {
+            "title": "R&D",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 9
+          },
+          {
+            "title": "Operations",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 10
+          },
+          {
+            "title": "Legal",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 11
+          },
+          {
+            "title": "Sales",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 12
+          },
+          {
+            "title": "Undefined",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 13
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10187,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "How do I get access",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10077,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "This section can hold attachments",
+        "name_plural": "",
+        "name_singular": "Attachments",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10190,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Business Benefits",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10186,
+        "field_type": "DATE",
+        "tooltip_text": "Date the solution was officially Live",
+        "name_plural": "",
+        "name_singular": "Go-Live Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10189,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Other Notes",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 68,
+    "layout_otype": 0,
+    "title": "Enablement Guide",
+    "visual_config_id": null
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10370,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Functional Domain",
+        "name_singular": "Functional Domain",
+        "backref_name": "Data Asset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 152,
+    "layout_otype": 27,
+    "title": "Energy",
+    "visual_config_id": 758
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      },
+      {
+        "id": 10091,
+        "field_type": "PICKER",
+        "tooltip_text": "This data has been identified as being governed by Data Stewards and part of the Data Governance program",
+        "name_plural": "",
+        "name_singular": "Governed Data",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Governed",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10041,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Terms",
+        "name_singular": "Related Term",
+        "backref_name": "Related Content",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10433,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "How it\u2019s used in reports, dashboards, or conversation.",
+        "name_plural": "",
+        "name_singular": "Example Usage",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10434,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Describes why this term, object, or asset exists and how it supports business goals, decision-making, or compliance. This field helps users understand the real-world importance of the item beyond its definition or technical properties.",
+        "name_plural": "",
+        "name_singular": "Context/Business Purpose",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 45,
+    "layout_otype": 96,
+    "title": "Enterprise Term",
+    "visual_config_id": 934
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      }
+    ],
+    "id": 108,
+    "layout_otype": 96,
+    "title": "Epic Registry",
+    "visual_config_id": 459
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 5,
+        "field_type": "PICKER",
+        "tooltip_text": "Status of the business glossary term",
+        "name_plural": "",
+        "name_singular": "Status",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "New",
+            "old_index": 0
+          },
+          {
+            "title": "Under Review",
+            "old_index": 1
+          },
+          {
+            "title": "Approved",
+            "old_index": 2
+          }
+        ],
+        "builtin_name": "business_glossary_status"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10039,
+        "field_type": "PICKER",
+        "tooltip_text": "This field Identifies if the data element is defined as being a Critical Data Element (CDE)",
+        "name_plural": "",
+        "name_singular": "CDE (Critical Data Element)",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Needs Review",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 44,
+    "layout_otype": 96,
+    "title": "Executive Term",
+    "visual_config_id": 630
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10021,
+        "field_type": "DATE",
+        "tooltip_text": "The date the policy was retired/ended/archived",
+        "name_plural": "",
+        "name_singular": "Deprecated Date",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 128,
+    "layout_otype": 96,
+    "title": "Finance Term",
+    "visual_config_id": 631
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10243,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Policies",
+        "name_singular": "Policy",
+        "backref_name": "Governs",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10237,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Data Assets",
+        "name_singular": "Related Data Asset",
+        "backref_name": "Related Data Asset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "schema",
+          "table",
+          "attribute",
+          "business_policy",
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 217,
+    "layout_otype": 96,
+    "title": "Financial Data Products",
+    "visual_config_id": 868
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10243,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Policies",
+        "name_singular": "Policy",
+        "backref_name": "Governs",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "business_policy"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10237,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "Related Data Assets",
+        "name_singular": "Related Data Asset",
+        "backref_name": "Related Data Asset",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "schema",
+          "table",
+          "attribute",
+          "business_policy",
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      }
+    ],
+    "id": 146,
+    "layout_otype": 96,
+    "title": "Financial Data Products",
+    "visual_config_id": 608
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 190,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 774
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 153,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 682
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 163,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 722
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 213,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 854
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 194,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 793
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 107,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 455
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 81,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 639
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 10008,
+        "field_type": "PICKER",
+        "tooltip_text": "The function that this policy is owned by",
+        "name_plural": "",
+        "name_singular": "Business Function",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Finance",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "Billing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Manufacturing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Logistics",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "HR",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          },
+          {
+            "title": "Sourcing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 5
+          },
+          {
+            "title": "IT",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 6
+          },
+          {
+            "title": "Marketing",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 7
+          },
+          {
+            "title": "All Functions",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 8
+          },
+          {
+            "title": "R&D",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 9
+          },
+          {
+            "title": "Operations",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 10
+          },
+          {
+            "title": "Legal",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 11
+          },
+          {
+            "title": "Sales",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 12
+          },
+          {
+            "title": "Undefined",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 13
+          }
+        ],
+        "builtin_name": null
+      },
+      {
+        "id": 10098,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Address 2 of Identifiable Entity for ROPA or related business activity",
+        "name_plural": "",
+        "name_singular": "Address Line 2",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10097,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Address of Identifiable Entity for ROPA or related business activity",
+        "name_plural": "",
+        "name_singular": "Address Line 1",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10096,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "Company of Identifiable Entity for ROPA or related business activity",
+        "name_plural": "",
+        "name_singular": "Company",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10099,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": "City/Town of Identifiable Entity for ROPA or related business activity",
+        "name_plural": "",
+        "name_singular": "City/Town",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 101,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 641
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 99,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 415
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      },
+      {
+        "id": 10293,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": null,
+        "name_plural": "DQ Objects",
+        "name_singular": "DQ Object",
+        "backref_name": "DQ Objects",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "glossary_term"
+        ],
+        "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10319,
+        "field_type": "PICKER",
+        "tooltip_text": "To identify the list of final assets for migration to Hedgie.",
+        "name_plural": "",
+        "name_singular": "Hedgie Migration",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Yes",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "No",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Top-level tagged (yes)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Dup (no)",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "TBD",
+            "tooltip_text": "",
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
+        "builtin_name": null
+      }
+    ],
+    "id": 105,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 642
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 112,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 466
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 90,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 379
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 92,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 382
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 94,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 384
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 87,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 387
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 96,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 388
+  },
+  {
+    "builtin_name": null,
+    "fields": [
+      {
+        "id": 4,
+        "field_type": "RICH_TEXT",
+        "tooltip_text": null,
+        "name_plural": "",
+        "name_singular": "Description",
+        "backref_name": null,
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": null,
+        "builtin_name": "description"
+      },
+      {
+        "id": 8,
+        "field_type": "OBJECT_SET",
+        "tooltip_text": "This is a required field!",
+        "name_plural": "Stewards",
+        "name_singular": "Steward",
+        "backref_name": "Steward",
+        "backref_tooltip_text": null,
+        "allow_multiple": true,
+        "allowed_otypes": [
+          "user",
+          "groupprofile",
+          "groupprofile"
+        ],
+        "options": null,
+        "builtin_name": "steward"
+      }
+    ],
+    "id": 114,
+    "layout_otype": 97,
+    "title": "Folder",
+    "visual_config_id": 468
+  }
+]

@@ -1,0 +1,8 @@
+--- Empty document creation Log ---
+Timestamp: 20250612-155231
+Total documents prepared: 3
+Successfully uploaded: 0
+Failed uploads: 3
+
+--- Individual Upload Results / Details ---
+FAILED: Empty document creation - 400 - {"job_id":null,"invalid_documents":[{"index":0,"errors":[{"template_id":["The following (doc_hub_id: 29) doesn't match with the (template_id: 195)"]}],"document":{"title":"New Documentt #1","document_hub_id":29,"parent_folder_id":119,"template_id":195,"description":"","custom_fields":[]}},{"index":1,"errors":[{"template_id":["The following (doc_hub_id: 29) doesn't match with the (template_id: 195)"]}],"document":{"title":"New Documentt #2","document_hub_id":29,"parent_folder_id":119,"template_id":195,"description":"","custom_fields":[]}},{"index":2,"errors":[{"template_id":["The following (doc_hub_id: 29) doesn't match with the (template_id: 195)"]}],"document":{"title":"New Documentt #3","document_hub_id":29,"parent_folder_id":119,"template_id":195,"description":"","custom_fields":[]}}]}

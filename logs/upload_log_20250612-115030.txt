@@ -1,0 +1,12 @@
+--- Upload Log for /Users/alex.davis/PycharmProjects/dhub/Document_template_ID_164.xlsx ---
+Timestamp: 20250612-115030
+Target Hub ID: 29
+Target Folder ID: 119
+Template: Document (ID: 164)
+Total rows processed (from Excel): 1
+Documents sent for upload: 1
+Successfully uploaded: 1
+Failed uploads: 0
+
+--- Individual Upload Results / Details ---
+SUCCESS: Bulk upload initiated. Job ID: 42306
