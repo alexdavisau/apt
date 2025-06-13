@@ -1,66 +1,107 @@
-# utils/token_checker.py
-
 import requests
-from datetime import datetime
-import os
+import json
+from pathlib import Path
+from config import config_handler
 
+CONFIG_PATH = Path("config.json")
 
-def check_token(config: dict) -> (bool, str):
+# =====================================================================================
+# The generic API request helper now lives here to resolve circular dependencies.
+# =====================================================================================
+def _make_api_request_with_retry(method: str, url: str, config: dict, token_refresher: callable, json_data: dict = None,
+                                 params: dict = None, timeout: int = 30, log_callback=print):
     """
-    Checks if the API token is valid by making a simple API call.
+    Helper function to make an API request with token refresh retry logic.
+    Receives the token_refresher function as an argument.
     """
-    # Local import to prevent circular dependency
-    from utils.api_client import _make_api_request_with_retry
+    retries = 1
 
-    if not config.get('token'):
-        return False, "❌ Token is missing from config.json."
+    while retries >= 0:
+        headers = {"TOKEN": config["access_token"], "accept": "application/json"}
+        if method == "POST":
+            headers["Content-Type"] = "application/json"
 
-    base_url = config['alation_url'].rstrip('/')
-    url = f"{base_url}/integration/v1/user/"
+        try:
+            response = requests.request(method, url, headers=headers, json=json_data, params=params, timeout=timeout)
 
-    # Note: We pass a simple print function for the log_callback here to avoid complexities
-    response = _make_api_request_with_retry("GET", url, config, log_callback=print)
+            if response.status_code in (401, 403) and retries > 0:
+                log_callback("⚠️ Access token unauthorized. Attempting to refresh...")
+                success, msg, new_tokens = token_refresher(config, log_callback=log_callback)
+                if success:
+                    config.update(new_tokens)
+                    config_handler.save_config(CONFIG_PATH, config)
+                    log_callback("✅ Token refreshed. Retrying API request...")
+                    retries -= 1
+                    continue
+                else:
+                    log_callback(f"❌ Failed to refresh token during API call: {msg}.")
+                    return None  # Refresh failed, stop trying
+            else:
+                return response
+
+        except requests.RequestException as e:
+            log_callback(f"❌ Request failed: {e}")
+            if retries > 0:
+                log_callback("Retrying API call...")
+                retries -= 1
+                continue
+            return None # Retries exhausted
+
+    return None # Should not be reached, but included for safety
+
+
+def refresh_access_token(config: dict, log_callback=print) -> tuple[bool, str, dict]:
+    """
+    Attempts to refresh the Alation access token using the refresh token.
+    """
+    alation_url = config.get("alation_url")
+    refresh_token = config.get("refresh_token")
+    user_id = config.get("user_id")
+
+    if not alation_url or not refresh_token or user_id is None:
+        return False, "Config missing URL, Refresh Token, or User ID.", {}
+
+    url = f"{alation_url.rstrip('/')}/integration/v1/createAPIAccessToken/"
+    payload = {"refresh_token": refresh_token, "user_id": user_id}
+
+    log_callback("Attempting to refresh access token...")
+
+    def no_op_refresher(*args, **kwargs):
+        return False, "Already in refresh process.", {}
+
+    response = _make_api_request_with_retry("POST", url, config, token_refresher=no_op_refresher, json_data=payload, log_callback=log_callback)
+
+    if response and response.status_code in (200, 201):
+        new_tokens = response.json()
+        new_access_token = new_tokens.get("api_access_token")
+
+        if new_access_token:
+            log_callback("✅ Access token refreshed successfully.")
+            new_refresh_token = new_tokens.get("refresh_token", refresh_token)
+            return True, "Access token refreshed.", {"access_token": new_access_token, "refresh_token": new_refresh_token, "user_id": user_id}
+        else:
+            return False, "Refresh successful but no new token found.", {}
+    elif response:
+        return False, f"Refresh failed with status {response.status_code}: {response.text}", {}
+    else:
+        return False, "Connection error during token refresh.", {}
+
+
+def check_token(config: dict) -> tuple[bool, str]:
+    """
+    Checks if the API token is valid. If not, attempts to refresh it.
+    """
+    log_message = print
+    if not config.get("alation_url") or not config.get("access_token"):
+        return False, "❌ Config missing URL or Access Token."
+
+    url = f"{config['alation_url'].rstrip('/')}/integration/v1/user/"
+    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token, log_callback=log_message)
 
     if response and response.status_code == 200:
         return True, "✅ Token is valid."
     elif response:
-        # Combine the error messages into one string to return only 2 values.
-        error_details = response.text
-        return False, f"❌ Token is likely invalid. API returned: {response.status_code} - {error_details}"
+        return False, f"❌ Token is invalid (Status: {response.status_code}). Check logs for refresh attempt details."
     else:
-        return False, "❌ Failed to connect to Alation. Check URL and network."
-
-
-def refresh_access_token(config: dict) -> (bool, str):
-    """
-    Refreshes the API token using the refresh_token from the config file.
-    """
-    from utils.api_client import _make_api_request_with_retry
-
-    refresh_token = config.get("refresh_token")
-    if not refresh_token:
-        return False, "❌ refresh_token is missing from config.json. Cannot refresh."
-
-    base_url = config['alation_url'].rstrip('/')
-    url = f"{base_url}/integration/v1/accessToken/"
-    payload = {"refresh_token": refresh_token}
-
-    # Use a simple print callback to avoid circular dependencies with main_window logging
-    response = _make_api_request_with_retry("POST", url, config, payload=payload, log_callback=print)
-
-    if response and response.status_code == 200:
-        data = response.json()
-        config['token'] = data['token']
-        config['user_id'] = data['user_id']
-
-        # Save the updated config back to the file
-        try:
-            with open('config.json', 'w') as f:
-                json.dump(config, f, indent=4)
-            return True, f"✅ New API Token for user_id {data['user_id']} obtained and saved."
-        except Exception as e:
-            return False, f"❌ Failed to save new token to config.json: {e}"
-    elif response:
-        return False, f"❌ API call to refresh token failed with status {response.status_code}: {response.text}"
-    else:
-        return False, "❌ Failed to connect to Alation to refresh token."
+        # This is the error you were seeing. It means the helper returned None.
+        return False, "❌ Connection Error during token check (no response after retries)."

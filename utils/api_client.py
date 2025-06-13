@@ -1,96 +1,78 @@
-# utils/api_client.py
-
-import requests
-import time
 import json
-import os
-from datetime import datetime, timedelta
+import time
+from pathlib import Path
+from urllib.parse import urljoin
 
-DOCUMENTS_CACHE_PATH = os.path.join('cache', 'cached_documents.json')
-TEMPLATES_CACHE_PATH = os.path.join('cache', 'cached_templates.json')
+# Import the authentication and request logic from its new, single location
+from utils.token_checker import _make_api_request_with_retry, refresh_access_token
 
+DOCUMENTS_CACHE_PATH = Path("cache/cached_documents.json")
+TEMPLATES_CACHE_PATH = Path("cache/cached_templates.json")
+CACHE_EXPIRY_SECONDS = 3600  # 1 hour
 
-def _make_api_request_with_retry(method, url, config, headers=None, payload=None, token_refresher=None,
-                                 log_callback=print):
-    """A centralized function to make API requests with retry logic for token expiration."""
-    if headers is None:
-        headers = {'Content-Type': 'application/json'}
-
-    token = config.get('token')
-    if token:
-        # Added .strip() for robustness against leading/trailing whitespace
-        headers['Authorization'] = f"Token {token.strip()}"
-
-    for attempt in range(2):
+def _load_from_cache(cache_path: Path, log_callback=print) -> tuple[list, bool]:
+    """Loads data from a JSON cache file if it's not expired."""
+    if cache_path.exists() and time.time() - cache_path.stat().st_mtime < CACHE_EXPIRY_SECONDS:
         try:
-            response = requests.request(method, url, headers=headers, json=payload, timeout=60)
+            with open(cache_path, "r") as f:
+                log_callback(f"✅ Loaded data from cache: {cache_path}")
+                return json.load(f), True
+        except (json.JSONDecodeError, IOError) as e:
+            log_callback(f"❌ Error reading cache file {cache_path}: {e}. Will fetch from API.")
+    return [], False
 
-            if response.status_code == 401 and token_refresher and attempt == 0:
-                log_callback("⚠️ API returned 401 Unauthorized. Attempting to refresh token...")
-                is_refreshed, refresh_message = token_refresher(config)
-                log_callback(refresh_message)
+def _save_to_cache(cache_path: Path, data: list, log_callback=print) -> None:
+    """Saves data to a JSON cache file."""
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(cache_path, "w") as f:
+        json.dump(data, f, indent=2)
+    log_callback(f"✅ Data saved to cache: {cache_path}")
 
-                if is_refreshed:
-                    headers['Authorization'] = f"Token {config['token'].strip()}"
-                    log_callback("✅ Token refreshed. Retrying the API request...")
-                    continue
-                else:
-                    log_callback("❌ Token refresh failed. Aborting API request.")
-                    return None
+def get_all_documents(config: dict, log_callback=print, force_api_fetch: bool = False) -> list:
+    """Fetches all documents from the Alation API, with pagination and caching."""
+    if not force_api_fetch:
+        cached_data, from_cache = _load_from_cache(DOCUMENTS_CACHE_PATH, log_callback)
+        if from_cache:
+            return cached_data
 
-            if response.status_code != 403:
-                response.raise_for_status()
-            return response
+    base_url = config['alation_url'].rstrip('/')
+    current_url = f"{base_url}/integration/v2/document/?deleted=false&limit=1000"
+    all_documents = []
+    page_num = 1
 
-        except requests.exceptions.HTTPError as http_err:
-            log_callback(f"❌ HTTP error occurred: {http_err} - {response.text}")
-            return response
-        except requests.exceptions.RequestException as req_err:
-            log_callback(f"❌ A critical request error occurred: {req_err}")
-            return None
-    return None
+    log_callback("Fetching all documents from API...")
+    while current_url:
+        log_callback(f"📄 Fetching page {page_num}...")
+        response = _make_api_request_with_retry("GET", current_url, config, token_refresher=refresh_access_token, log_callback=log_callback, timeout=60)
 
+        if response and response.status_code == 200:
+            data = response.json()
+            all_documents.extend(data)
+            next_page_path = response.headers.get('X-Next-Page')
+            current_url = urljoin(base_url, next_page_path) if next_page_path else None
+            page_num += 1
+        else:
+            log_callback(f"❌ Failed to fetch documents. Stopping.")
+            break
 
-def get_all_documents(config: dict, log_callback=print, force_api_fetch=False) -> list:
-    """Fetches all documents, using cache if available and not expired."""
-    from utils.token_checker import refresh_access_token
+    if all_documents:
+        _save_to_cache(DOCUMENTS_CACHE_PATH, all_documents, log_callback)
+    return all_documents
 
-    cache_file = DOCUMENTS_CACHE_PATH
-    # ... (rest of function is unchanged)
-    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token,
-                                            log_callback=log_callback)
-    # ...
-    return []  # return empty list on failure
+def get_all_templates(config: dict, log_callback=print, force_api_fetch: bool = False) -> list:
+    """Fetches all templates from the Alation API, with caching."""
+    if not force_api_fetch:
+        cached_data, from_cache = _load_from_cache(TEMPLATES_CACHE_PATH, log_callback)
+        if from_cache:
+            return cached_data
 
+    url = f"{config['alation_url'].rstrip('/')}/integration/v1/custom_template/"
+    log_callback(f"🔍 Fetching all templates from API...")
+    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token, log_callback=log_callback)
 
-def get_all_templates(config: dict, log_callback=print, force_api_fetch=False) -> list:
-    """Fetches all templates, using cache if available."""
-    from utils.token_checker import refresh_access_token
+    if response and response.status_code == 200:
+        templates = response.json()
+        _save_to_cache(TEMPLATES_CACHE_PATH, templates, log_callback)
+        return templates
 
-    cache_file = TEMPLATES_CACHE_PATH
-    # ... (rest of function is unchanged)
-    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token,
-                                            log_callback=log_callback)
-    # ...
-    return []  # return empty list on failure
-
-
-def create_documents_in_bulk(config: dict, payloads: list, job_name: str, log_callback=print, on_success_callback=None):
-    """Posts a list of document payloads to the bulk creation API."""
-    from utils.token_checker import refresh_access_token
-
-    # ... (rest of function is unchanged)
-    response = _make_api_request_with_retry("POST", url, config, payload=payloads, token_refresher=refresh_access_token,
-                                            log_callback=log_callback)
-    # ...
-
-
-def get_hub_details(config: dict, hub_id: int, log_callback=print):
-    """Fetches the full details of a specific document hub."""
-    from utils.token_checker import refresh_access_token
-
-    # ... (rest of function is unchanged)
-    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token,
-                                            log_callback=log_callback)
-    # ...
-    return None  # return None on failure
+    return []
