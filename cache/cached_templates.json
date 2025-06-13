@@ -468,50 +468,6 @@
     "builtin_name": null,
     "fields": [
       {
-        "id": 10056,
-        "field_type": "MULTI_PICKER",
-        "tooltip_text": null,
-        "name_plural": "Features (BU)",
-        "name_singular": "Features (BU)",
-        "backref_name": "backref",
-        "backref_tooltip_text": null,
-        "allow_multiple": false,
-        "allowed_otypes": null,
-        "options": [
-          {
-            "title": "Broken Links",
-            "tooltip_text": null,
-            "article_id": null,
-            "old_index": 0
-          },
-          {
-            "title": "External Links",
-            "tooltip_text": null,
-            "article_id": null,
-            "old_index": 1
-          },
-          {
-            "title": "Asynchronous",
-            "tooltip_text": null,
-            "article_id": null,
-            "old_index": 2
-          },
-          {
-            "title": "Empty Cols",
-            "tooltip_text": null,
-            "article_id": null,
-            "old_index": 3
-          },
-          {
-            "title": "Include Private",
-            "tooltip_text": null,
-            "article_id": null,
-            "old_index": 4
-          }
-        ],
-        "builtin_name": null
-      },
-      {
         "id": 10058,
         "field_type": "DATE",
         "tooltip_text": null,
@@ -561,6 +517,50 @@
         "allow_multiple": false,
         "allowed_otypes": null,
         "options": null,
+        "builtin_name": null
+      },
+      {
+        "id": 10056,
+        "field_type": "MULTI_PICKER",
+        "tooltip_text": null,
+        "name_plural": "Features (BU)",
+        "name_singular": "Features (BU)",
+        "backref_name": "backref",
+        "backref_tooltip_text": null,
+        "allow_multiple": false,
+        "allowed_otypes": null,
+        "options": [
+          {
+            "title": "Broken Links",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 0
+          },
+          {
+            "title": "External Links",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 1
+          },
+          {
+            "title": "Asynchronous",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 2
+          },
+          {
+            "title": "Empty Cols",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 3
+          },
+          {
+            "title": "Include Private",
+            "tooltip_text": null,
+            "article_id": null,
+            "old_index": 4
+          }
+        ],
         "builtin_name": null
       },
       {

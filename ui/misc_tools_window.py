@@ -18,6 +18,50 @@ _selected_template_id_misc = None
 _selected_template_details_misc = None
 
 
+def create_misc_tools_window(config, log_callback, fetch_hubs_callback):
+    """
+    Creates the 'Miscellaneous Tools' window and its UI elements.
+    This function should be called only once at application startup.
+    """
+    # Assign the passed-in functions and config to the module-level variables
+    global _config, _log_callback, _fetch_hubs_callback
+    _config = config
+    _log_callback = log_callback
+    _fetch_hubs_callback = fetch_hubs_callback
+
+    # Define the window
+    with dpg.window(label="Miscellaneous Tools", tag="misc_tools_window", width=600, height=400, show=False, on_close=lambda: dpg.configure_item("misc_tools_window", show=False)):
+        # Set a callback to refresh data whenever this window is shown
+
+
+        dpg.add_text("This window provides tools for special actions, like creating empty documents.")
+        dpg.add_separator()
+        dpg.add_text("Document Creation Target", color=(200, 200, 255))
+
+        # UI for selecting Hub, Folder, and Template
+        with dpg.group(horizontal=True):
+            dpg.add_text("Target Hub:      ")
+            dpg.add_combo(items=[], tag="misc_hub_combo", width=-1, callback=hub_selected_callback_misc_internal, enabled=False)
+
+        with dpg.group(horizontal=True):
+            dpg.add_text("Target Folder:   ")
+            dpg.add_combo(items=[], tag="misc_folder_combo", width=-1, callback=folder_selected_callback_misc_internal, enabled=False)
+
+        with dpg.group(horizontal=True):
+            dpg.add_text("Target Template: ")
+            dpg.add_combo(items=[], tag="misc_template_combo", width=-1, callback=template_selected_callback_misc_internal, enabled=False)
+
+        dpg.add_separator()
+        dpg.add_text("Create Empty Documents", color=(255, 255, 0))
+
+        # UI for creating empty documents
+        dpg.add_input_text(label="Base Title", tag="empty_doc_base_title", default_value="New Document via APT")
+        dpg.add_input_int(label="Number to Create", tag="empty_doc_count", default_value=1, min_value=1, max_value=100)
+
+        dpg.add_button(label="Create Empty Documents", tag="create_empty_button", callback=create_empty_documents_callback_internal, enabled=False)
+        dpg.add_text("Note: This uses the Hub, Folder, and Template selected above.", wrap=580, color=(150, 150, 150))
+
+
 # --- Module-level Callbacks for Misc Tools Window ---
 
 # This function is now at the module level
