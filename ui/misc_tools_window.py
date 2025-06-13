@@ -1,17 +1,15 @@
-# In ui/misc_tools_window.py
-
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import logging
 
-from core.app_state import app_state # CORRECTED: Import lowercase 'app_state'
+from core.app_state import AppState # CORRECTED: Import uppercase 'AppState'
 from utils import alation_lookup
 from utils.processing_utils import process_hub_and_folders
 
 logger = logging.getLogger(__name__)
 
 class MiscToolsWindow(tk.Toplevel):
-    def __init__(self, parent, app_state: app_state): # CORRECTED: Use lowercase 'app_state' for type hint
+    def __init__(self, parent, app_state: AppState): # CORRECTED: Use 'AppState' for type hint
         super().__init__(parent)
         self.title("Miscellaneous Tools")
         self.geometry("600x400")
@@ -63,7 +61,6 @@ class MiscToolsWindow(tk.Toplevel):
             return
 
         try:
-            # Extract ID from "Hub: Title (ID: 123)"
             hub_id = int(selection.split('(ID:')[-1].replace(')', '').strip())
             self.selected_hub_id.set(hub_id)
             self.process_button['state'] = 'normal'
