@@ -12,30 +12,36 @@ class MainApplication(ttk.Frame):
     def __init__(self, parent, config, is_token_valid, status_message):
         super().__init__(parent, padding="10")
 
+        # parent is the root tk.Tk() window.
         self.parent = parent
 
+        # Initialize the shared application state
         self.app_state = AppState(log_callback=self.log_to_console)
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
+        # --- 1. Create all widgets first ---
         self._create_menu()
 
-        # --- Status Bar (Packed First to Reserve Bottom Space) ---
+        # Create the status bar (it will be placed at the bottom)
         self.status_bar = ttk.Label(self, text=status_message, relief=tk.SUNKEN, anchor=tk.W, padding="2")
+
+        # Create the log console frame and the text widget inside it
+        log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
+        self.log_console = scrolledtext.ScrolledText(log_frame, state='disabled', wrap=tk.WORD, height=10)
+
+        # --- 2. Place all widgets on the screen using the .pack() geometry manager ---
+
+        # Pack the status bar at the bottom first to reserve its space
         self.status_bar.pack(side=tk.BOTTOM, fill=tk.X, pady=(5, 0))
 
-        # --- Log Console (Packed to Fill Remaining Space) ---
-        log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
+        # Pack the log frame to fill all remaining space
         log_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 
-        # Configure the grid inside the log_frame to make the text widget expand
-        log_frame.rowconfigure(0, weight=1)
-        log_frame.columnconfigure(0, weight=1)
+        # Pack the text widget to fill the log frame
+        self.log_console.pack(fill=tk.BOTH, expand=True)
 
-        self.log_console = scrolledtext.ScrolledText(log_frame, state='disabled', wrap=tk.WORD, height=10)
-        self.log_console.grid(row=0, column=0, sticky="nsew")  # grid is fine inside this frame
-
-        # Log the initial status
+        # --- 3. Log the initial status ---
         self.log_to_console(f"APT Initialized. {status_message}")
 
     def _create_menu(self):
