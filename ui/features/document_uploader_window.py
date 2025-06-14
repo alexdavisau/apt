@@ -10,7 +10,7 @@ class DocumentUploaderWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Upload Documents")
-        self.geometry("700x350")
+        self.geometry("700x400")
         self.transient(parent)
         self.grab_set()
 
@@ -22,13 +22,13 @@ class DocumentUploaderWindow(tk.Toplevel):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
 
-        # 1. Create an instance of the reusable selector component
+        # Create an instance of the reusable selector component
         self.selectors = SelectorComponent(main_frame, self.app_state)
-        self.selectors.pack(expand=True, fill="x", pady=5)
+        self.selectors.pack(expand=True, fill="x", pady=5, anchor="n")
 
-        # 2. Add widgets specific to this feature
+        # Add widgets specific to this feature
         uploader_lf = ttk.LabelFrame(main_frame, text="File", padding=10)
-        uploader_lf.pack(expand=True, fill="x", pady=5)
+        uploader_lf.pack(expand=True, fill="x", pady=5, anchor="n")
         uploader_lf.columnconfigure(1, weight=1)
 
         ttk.Label(uploader_lf, text="File to Upload:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)

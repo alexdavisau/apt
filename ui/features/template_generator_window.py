@@ -4,14 +4,14 @@ import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 from core.app_state import AppState
 from ui.components.selector_component import SelectorComponent
-from utils import excel_writer, visual_config_fetcher
+from utils import excel_writer
 
 
 class TemplateGeneratorWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Generate Excel from Template")
-        self.geometry("700x300")
+        self.geometry("700x350")
         self.transient(parent)
         self.grab_set()
 
@@ -22,12 +22,13 @@ class TemplateGeneratorWindow(tk.Toplevel):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
 
-        # 1. Create an instance of the reusable selector component
+        # Create an instance of the reusable selector component
         self.selectors = SelectorComponent(main_frame, self.app_state)
-        self.selectors.pack(expand=True, fill="x")
+        self.selectors.pack(expand=True, fill="x", anchor="n")
 
-        # 2. Add the button specific to this feature
-        ttk.Button(main_frame, text="Create Excel File", command=self._create_validated_excel).pack(pady=10)
+        # Add the button specific to this feature
+        self.create_button = ttk.Button(main_frame, text="Create Excel File", command=self._create_validated_excel)
+        self.create_button.pack(pady=20)
 
     def _create_validated_excel(self):
         selections = self.selectors.get_selections()
@@ -40,13 +41,13 @@ class TemplateGeneratorWindow(tk.Toplevel):
                                    parent=self)
             return
 
-        # Fetching visual_configs is now done inside this function, only when needed.
-        visual_configs = visual_config_fetcher.get_all_visual_configs(self.app_state.config,
-                                                                      self.app_state.log_callback)
-        visual_config_obj = next((vc for vc in visual_configs if vc.get('id') == template_id), None)
+        # CORRECTED LOGIC: Find the visual config object from the list loaded by the selector component
+        visual_config_obj = next((vc for vc in self.selectors.visual_configs if vc.get('id') == template_id), None)
 
         if not visual_config_obj:
-            messagebox.showerror("Error", f"Could not find Visual Config for Template ID {template_id}.", parent=self)
+            messagebox.showerror("Error",
+                                 f"Could not find Visual Config for Template ID {template_id}. This can happen if the Visual Config ID does not match the Template ID.",
+                                 parent=self)
             return
 
         output_path = filedialog.asksaveasfilename(
