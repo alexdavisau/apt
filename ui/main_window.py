@@ -18,14 +18,12 @@ class MainApplication(ttk.Frame):
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
-        # --- Store data fetched from API ---
         self.all_hubs = []
         self.all_templates = []
         self.all_documents = []
 
         self._create_menu()
-        self._create_layout()
-        self._create_widgets()
+        self._create_layout_and_widgets()
 
         self._show_frame(self.main_menu_frame)
 
@@ -45,22 +43,28 @@ class MainApplication(ttk.Frame):
         self.menu_bar.add_cascade(label="Tools", menu=tools_menu)
         tools_menu.add_command(label="Misc Tools", command=self.open_misc_tools_window)
 
-    def _create_layout(self):
-        self.main_menu_frame = ttk.Frame(self)
-        self.uploader_frame = ttk.Frame(self)
+    def _create_layout_and_widgets(self):
+        """Creates and arranges all frames and widgets for the application."""
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        # --- Main Container for swapping frames ---
+        main_container = ttk.Frame(self)
+        main_container.grid(row=0, column=0, sticky="new")
+
+        self.main_menu_frame = ttk.Frame(main_container)
+        self.uploader_frame = ttk.Frame(main_container)
+
         self.main_menu_frame.grid(row=0, column=0, sticky="nsew")
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
-        self.rowconfigure(0, weight=1)
-        self.columnconfigure(0, weight=1)
 
-    def _create_widgets(self):
-        # --- 1. Main Menu Widgets ---
+        # --- Main Menu Widgets ---
         menu_lf = ttk.LabelFrame(self.main_menu_frame, text="Core Functions", padding=10)
         menu_lf.pack(expand=True, fill="both", padx=5, pady=5)
         ttk.Button(menu_lf, text="Upload Documents", command=lambda: self._show_frame(self.uploader_frame)).pack(
             pady=10, ipadx=10, ipady=5)
 
-        # --- 2. Uploader Widgets ---
+        # --- Uploader Widgets ---
         uploader_lf = ttk.LabelFrame(self.uploader_frame, text="Upload Documents from File", padding=10)
         uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
@@ -93,7 +97,7 @@ class MainApplication(ttk.Frame):
         self.upload_button = ttk.Button(uploader_lf, text="Upload and Process File", command=self._upload_file)
         self.upload_button.grid(row=5, column=1, columnspan=2, pady=10)
 
-        # --- 3. Log Console & Status Bar (Common) ---
+        # --- Log Console & Status Bar ---
         log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
         log_frame.grid(row=1, column=0, sticky="nsew", pady=5)
         log_frame.rowconfigure(0, weight=1)
@@ -103,18 +107,19 @@ class MainApplication(ttk.Frame):
 
         self.status_bar = ttk.Label(self, text="Ready", relief=tk.SUNKEN, anchor=tk.W, padding="2")
         self.status_bar.grid(row=2, column=0, sticky="ew")
-        self.rowconfigure(1, weight=1)
 
     def _show_frame(self, frame_to_show):
         frame_to_show.tkraise()
 
     def _load_initial_data(self):
-        """Loads all necessary data from Alation and populates the initial Hub dropdown."""
         self.log_to_console("--- Refreshing all data from Alation ---")
-        self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console)
-        self.all_templates = api_client.get_all_templates(self.app_state.config, self.log_to_console)
+        self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console,
+                                                              force_fetch=True)
+        self.all_templates = api_client.get_all_templates(self.app_state.config, self.log_to_console,
+                                                          force_api_fetch=True)
 
-        self.all_hubs = [doc for doc in self.all_documents if doc.get('parent_folder_id') is None]
+        self.all_hubs = [doc for doc in self.all_documents if
+                         doc.get('parent_folder_id') is None and doc.get('template_id') is None]
 
         if self.all_hubs:
             hub_ids = sorted([hub.get('id') for hub in self.all_hubs])
@@ -122,45 +127,34 @@ class MainApplication(ttk.Frame):
             self.log_to_console(f"✅ Found {len(hub_ids)} Document Hubs. Please select a Hub ID.")
         else:
             self.log_to_console("❌ No Document Hubs found.")
-            self.hub_selector['values'] = []
 
-        # Clear dependent dropdowns
-        self.folder_selector['values'] = []
         self.folder_selector.set('')
-        self.template_selector['values'] = []
         self.template_selector.set('')
 
     def _on_hub_selected(self, event=None):
-        """Callback when a hub is selected. Populates folders and filtered templates."""
         try:
             selected_hub_id = int(self.hub_selector.get())
         except (ValueError, TypeError):
-            self.log_to_console("Invalid Hub ID selected.")
             return
 
-        # --- Populate Folders ---
+        # Populate Folders
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
         folder_names = [f"{f.get('title')} (ID: {f.get('id')})" for f in folders]
-        # Add the Hub itself as the root option
-        hub_as_folder = next((h for h in self.all_hubs if h.get('id') == selected_hub_id), None)
-        if hub_as_folder:
-            folder_names.insert(0, f"{hub_as_folder.get('title')} (Hub Root)")
         self.folder_selector['values'] = folder_names
 
-        # --- Filter and Populate Templates ---
+        # Filter and Populate Templates
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
 
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
         template_titles = [t.get('title') for t in compatible_templates]
 
-        self.template_selector['values'] = sorted(template_titles)
+        self.template_selector['values'] = sorted(list(set(template_titles)))  # Use set to get unique titles
         self.log_to_console(
             f"✅ Found {len(folder_names)} folders and {len(template_titles)} compatible templates for Hub ID {selected_hub_id}.")
 
     def _select_file(self):
-        filepath = filedialog.askopenfilename(
-            filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv"), ("All files", "*.*")))
+        filepath = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")))
         if filepath:
             self.filepath_var.set(filepath)
 
