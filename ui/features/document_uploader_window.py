@@ -13,7 +13,7 @@ class DocumentUploaderWindow(tk.Toplevel):
 
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
-        self.title("Upload Documents")  # TITLE FIXED
+        self.title("Upload Documents")
         self.geometry("700x450")
         self.transient(parent)
         self.grab_set()
@@ -27,20 +27,19 @@ class DocumentUploaderWindow(tk.Toplevel):
         self._create_widgets()
 
         if self.app_state.is_token_valid:
-            self._load_initial_data()
+            # CORRECTED: Schedule the data load to run after the window appears
+            self.after(100, self._load_initial_data)
 
     def _create_widgets(self):
         """Creates and arranges widgets for this feature."""
-        # LAYOUT FIX: Use .pack() for the main container
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
         main_frame.columnconfigure(1, weight=1)
 
         uploader_lf = ttk.LabelFrame(main_frame, text="Upload Documents from File", padding=10)
-        uploader_lf.pack(expand=True, fill="both")  # Use pack here as well
+        uploader_lf.grid(row=0, column=0, sticky="nsew")
         uploader_lf.columnconfigure(1, weight=1)
 
-        # --- Widgets using .grid() inside the LabelFrame ---
         ttk.Button(uploader_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
                                                                                                    padx=5, pady=5,
                                                                                                    sticky="w")
@@ -68,6 +67,7 @@ class DocumentUploaderWindow(tk.Toplevel):
                                                                                                 columnspan=2, pady=10)
 
     def _load_initial_data(self):
+        """Loads data from Alation and populates the Hub dropdown."""
         self.app_state.log_callback("--- Document Uploader: Refreshing data ---")
         self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.app_state.log_callback,
                                                               force_fetch=True)
@@ -86,6 +86,7 @@ class DocumentUploaderWindow(tk.Toplevel):
         self.template_selector.set('')
 
     def _on_hub_selected(self, event=None):
+        """Callback when a hub is selected. Populates folders and templates."""
         try:
             selected_hub_id = int(self.hub_selector.get())
         except (ValueError, TypeError):

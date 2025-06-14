@@ -7,20 +7,15 @@ from utils import alation_lookup, api_client, excel_writer, visual_config_fetche
 
 
 class TemplateGeneratorWindow(tk.Toplevel):
-    """
-    A window dedicated to the 'Generate Excel from Template' feature.
-    """
-
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
-        self.title("Generate Excel from Template")  # TITLE FIXED
+        self.title("Generate Excel from Template")
         self.geometry("700x400")
         self.transient(parent)
         self.grab_set()
 
         self.app_state = app_state
 
-        # Data Stores
         self.visual_configs = []
         self.all_templates = []
         self.all_documents = []
@@ -28,20 +23,18 @@ class TemplateGeneratorWindow(tk.Toplevel):
         self._create_widgets()
 
         if self.app_state.is_token_valid:
-            self._load_initial_data()
+            # CORRECTED: Schedule the data load to run after the window appears
+            self.after(100, self._load_initial_data)
 
     def _create_widgets(self):
-        """Creates and arranges widgets for this feature."""
-        # LAYOUT FIX: Use .pack() for the main container
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
         main_frame.columnconfigure(1, weight=1)
 
-        controls_lf = ttk.LabelFrame(main_frame, text="Options", padding=10)
-        controls_lf.pack(expand=True, fill="both")
+        controls_lf = ttk.LabelFrame(main_frame, text="Create Validated Excel Template", padding=10)
+        controls_lf.grid(row=0, column=0, sticky="nsew")
         controls_lf.columnconfigure(1, weight=1)
 
-        # --- Widgets using .grid() inside the LabelFrame ---
         ttk.Button(controls_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
                                                                                                    padx=5, pady=5,
                                                                                                    sticky="w")
