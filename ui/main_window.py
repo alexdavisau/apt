@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-# CORRECTED: Direct import of the class from the new module
+# CORRECTED: Import the new window classes directly
 from ui.features.template_generator_window import TemplateGeneratorWindow
 from ui.features.document_uploader_window import DocumentUploaderWindow
 
@@ -71,12 +71,12 @@ class MainApplication(ttk.Frame):
 
     def open_template_generator(self):
         """Opens the Template Generator feature window."""
-        # CORRECTED: Call the directly imported class
+        # CORRECTED: Call the class directly
         self._open_feature_window(TemplateGeneratorWindow)
 
     def open_document_uploader(self):
         """Opens the Document Uploader feature window."""
-        # CORRECTED: Call the directly imported class
+        # CORRECTED: Call the class directly
         self._open_feature_window(DocumentUploaderWindow)
 
     def open_config_window(self):
