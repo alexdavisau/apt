@@ -3,18 +3,22 @@
 import openpyxl
 from tkinter import messagebox
 
-def create_template_excel(template_details: dict, output_path: str, log_callback=print):
+
+def create_template_excel(template_details: dict, hub_id: int, folder_id: int, output_path: str, log_callback=print):
     """
-    Creates an Excel file with headers based on an Alation template's custom fields.
+    Creates an Excel file with headers based on an Alation template's custom fields
+    and includes a hidden sheet with metadata.
 
     Args:
         template_details (dict): The full dictionary of the selected template.
+        hub_id (int): The ID of the selected Document Hub.
+        folder_id (int): The ID of the selected Folder (can be the same as hub_id for root).
         output_path (str): The path where the Excel file will be saved.
         log_callback (callable): A function to handle logging.
     """
     if not template_details or 'custom_fields' not in template_details:
-        log_callback("❌ Invalid template details provided.")
-        messagebox.showerror("Error", "Invalid template details provided.")
+        log_callback("❌ Invalid template details provided to excel_writer.")
+        messagebox.showerror("Error", "Invalid template details passed to Excel writer.")
         return
 
     custom_fields = template_details.get('custom_fields', [])
@@ -23,20 +27,30 @@ def create_template_excel(template_details: dict, output_path: str, log_callback
         messagebox.showwarning("Warning", "The selected template has no custom fields.")
         return
 
-    # Extract the 'name' of each custom field to use as a header
     headers = [field.get('name', 'Unnamed Field') for field in custom_fields]
+    template_id = template_details.get('id')
 
     try:
         # Create a new Excel workbook and select the active sheet
         workbook = openpyxl.Workbook()
         sheet = workbook.active
         sheet.title = "Alation Upload"
-
-        # Append the headers to the first row
         sheet.append(headers)
         log_callback(f"Generated headers: {headers}")
 
-        # Save the workbook to the specified path
+        # Create and hide the metadata sheet
+        metadata_sheet = workbook.create_sheet(title="_apt_metadata")
+        metadata_sheet.sheet_state = 'hidden'
+
+        # Write the traceability keys
+        metadata_sheet['A1'] = "Source Hub ID"
+        metadata_sheet['B1'] = hub_id
+        metadata_sheet['A2'] = "Source Folder ID"
+        metadata_sheet['B2'] = folder_id
+        metadata_sheet['A3'] = "Source Template ID"
+        metadata_sheet['B3'] = template_id
+        log_callback(f"Wrote metadata: HubID={hub_id}, FolderID={folder_id}, TemplateID={template_id}")
+
         workbook.save(output_path)
         log_callback(f"✅ Successfully created validated Excel file at: {output_path}")
         messagebox.showinfo("Success", f"Successfully created validated Excel file at:\n{output_path}")
