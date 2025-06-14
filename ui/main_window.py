@@ -18,13 +18,11 @@ class MainApplication(ttk.Frame):
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
-        self.all_hubs = []
         self.all_templates = []
         self.all_documents = []
 
         self._create_menu()
         self._create_layout_and_widgets()
-
         self._show_frame(self.main_menu_frame)
 
         self.log_to_console(f"APT Initialized. {status_message}")
@@ -48,13 +46,10 @@ class MainApplication(ttk.Frame):
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        # --- Main Container for swapping frames ---
         main_container = ttk.Frame(self)
         main_container.grid(row=0, column=0, sticky="new")
-
         self.main_menu_frame = ttk.Frame(main_container)
         self.uploader_frame = ttk.Frame(main_container)
-
         self.main_menu_frame.grid(row=0, column=0, sticky="nsew")
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
 
@@ -112,46 +107,53 @@ class MainApplication(ttk.Frame):
         frame_to_show.tkraise()
 
     def _load_initial_data(self):
+        """Loads all necessary data from Alation and populates the initial Hub ID dropdown."""
         self.log_to_console("--- Refreshing all data from Alation ---")
         self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console,
                                                               force_fetch=True)
         self.all_templates = api_client.get_all_templates(self.app_state.config, self.log_to_console,
                                                           force_api_fetch=True)
 
-        self.all_hubs = [doc for doc in self.all_documents if
-                         doc.get('parent_folder_id') is None and doc.get('template_id') is None]
-
-        if self.all_hubs:
-            hub_ids = sorted([hub.get('id') for hub in self.all_hubs])
+        if self.all_documents:
+            # CORRECTED LOGIC: Extract unique document_hub_id values from all documents.
+            hub_ids = sorted(list(set(
+                doc['document_hub_id']
+                for doc in self.all_documents if doc.get('document_hub_id') is not None
+            )))
             self.hub_selector['values'] = hub_ids
-            self.log_to_console(f"✅ Found {len(hub_ids)} Document Hubs. Please select a Hub ID.")
+            self.log_to_console(f"✅ Found {len(hub_ids)} unique Document Hub IDs. Please select one.")
         else:
-            self.log_to_console("❌ No Document Hubs found.")
+            self.log_to_console("❌ No documents found, cannot populate Hub IDs.")
+            self.hub_selector['values'] = []
 
         self.folder_selector.set('')
         self.template_selector.set('')
 
     def _on_hub_selected(self, event=None):
+        """Callback when a hub is selected. Populates folders and filtered templates."""
         try:
             selected_hub_id = int(self.hub_selector.get())
         except (ValueError, TypeError):
             return
 
-        # Populate Folders
-        folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
-        folder_names = [f"{f.get('title')} (ID: {f.get('id')})" for f in folders]
-        self.folder_selector['values'] = folder_names
+        self.log_to_console(f"--- Populating folders and templates for Hub ID: {selected_hub_id} ---")
 
-        # Filter and Populate Templates
+        # --- Populate Folders ---
+        folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
+        # Add the Hub itself as the root option
+        folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
+        folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
+        self.folder_selector['values'] = folder_display_list
+
+        # --- Filter and Populate Templates ---
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
 
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
         template_titles = [t.get('title') for t in compatible_templates]
 
-        self.template_selector['values'] = sorted(list(set(template_titles)))  # Use set to get unique titles
-        self.log_to_console(
-            f"✅ Found {len(folder_names)} folders and {len(template_titles)} compatible templates for Hub ID {selected_hub_id}.")
+        self.template_selector['values'] = sorted(list(set(template_titles)))
+        self.log_to_console(f"✅ Found {len(folders)} folders and {len(template_titles)} compatible templates.")
 
     def _select_file(self):
         filepath = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")))
