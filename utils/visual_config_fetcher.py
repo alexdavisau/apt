@@ -2,13 +2,15 @@
 
 from utils.token_checker import _make_api_request_with_retry, refresh_access_token
 
+
 def get_all_visual_configs(config: dict, log_callback=print) -> list:
     """
-    Fetches all visual configurations from the /v1/visual-config/ endpoint.
-    This is the source of truth for template field layouts.
+    Fetches all visual configurations from the /integration/visual_config/ endpoint.
     """
     log_callback("🔍 Fetching all Visual Configs...")
-    url = f"{config['alation_url'].rstrip('/')}/v1/visual-config/"
+
+    # CORRECTED: Use the endpoint path confirmed by your curl command
+    url = f"{config['alation_url'].rstrip('/')}/integration/visual_config/"
 
     response = _make_api_request_with_retry(
         "GET",
@@ -23,5 +25,6 @@ def get_all_visual_configs(config: dict, log_callback=print) -> list:
         log_callback(f"✅ Found {len(visual_configs)} Visual Configs.")
         return visual_configs
     else:
-        log_callback("❌ Error fetching Visual Configs. This may be a permissions issue or an incorrect endpoint for your Alation version.")
+        log_callback(
+            "❌ Error fetching Visual Configs. This may be a permissions issue or an incorrect endpoint for your Alation version.")
         return []
