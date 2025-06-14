@@ -4,12 +4,11 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-from utils import alation_lookup, api_client, excel_writer, template_fetcher
+# REMOVED: template_fetcher is no longer needed
+from utils import alation_lookup, api_client, excel_writer
 
 
 class MainApplication(ttk.Frame):
-    """The main application frame that contains all the primary UI elements."""
-
     def __init__(self, parent, config, is_token_valid, status_message):
         super().__init__(parent, padding="10")
         self.parent = parent
@@ -210,7 +209,6 @@ class MainApplication(ttk.Frame):
             self.filepath_var.set(filepath)
 
     def _get_id_from_selection(self, selection_string: str) -> int:
-        """Parses an ID from a display string like 'Title (ID: 123)'."""
         if not selection_string or "(ID:" not in selection_string:
             return None
         try:
@@ -223,27 +221,27 @@ class MainApplication(ttk.Frame):
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
 
     def _create_validated_excel(self):
-        """Fetches full template details and calls the excel writer utility."""
-        hub_id = self._get_id_from_selection(self.excel_hub_selector.get())
+        """Looks up the selected template from the pre-fetched master list and creates the Excel file."""
+        try:
+            hub_id = int(self.excel_hub_selector.get())
+        except (ValueError, TypeError):
+            hub_id = None
+
         folder_id = self._get_id_from_selection(self.excel_folder_selector.get())
         template_id = self._get_id_from_selection(self.excel_template_selector.get())
 
-        # More explicit check to see what is failing
-        if hub_id is None:
-            messagebox.showwarning("Selection Required", "A Document Hub ID must be selected.", parent=self)
-            return
-        if folder_id is None:
-            messagebox.showwarning("Selection Required", "A Folder must be selected.", parent=self)
-            return
-        if template_id is None:
-            messagebox.showwarning("Selection Required", "A Template must be selected.", parent=self)
+        if not all([hub_id, folder_id, template_id]):
+            messagebox.showwarning("Selection Required", "Please select a Hub, Folder, and Template first.",
+                                   parent=self)
             return
 
-        template_details = template_fetcher.get_template_details(self.app_state.config, template_id,
-                                                                 self.log_to_console)
+        # CORRECTED LOGIC: Find the template details from the already-loaded self.all_templates list
+        template_details = next((t for t in self.all_templates if t.get('id') == template_id), None)
 
         if not template_details:
-            messagebox.showerror("Error", f"Could not fetch details for Template ID {template_id}.", parent=self)
+            messagebox.showerror("Error",
+                                 f"Could not find details for Template ID {template_id} in the initial data load.",
+                                 parent=self)
             return
 
         output_path = filedialog.asksaveasfilename(
