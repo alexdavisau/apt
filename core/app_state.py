@@ -1,46 +1,35 @@
 # core/app_state.py
 
-# Global variables to hold application state
-all_documents = [] # All documents fetched from Alation
-all_available_templates = [] # All templates fetched from Alation
+import logging
+from config import config_handler
 
-# Currently selected items (IDs and details) for the main window
-selected_hub_id = None
-selected_folder_id = None
-selected_template_id = None
-selected_template_details = None # Full details for the selected template
+# Configure logging
+logger = logging.getLogger(__name__)
 
-# Data for dropdowns (derived from all_documents/all_available_templates)
-# These lists are populated by UI functions in main_window and misc_tools_window.
-hub_names_for_combo = []
-folder_titles_for_combo = []
-template_titles_for_combo = []
+class AppState:
+    """A centralized state manager for the application."""
+    def __init__(self, log_callback=print):
+        self.log_callback = log_callback
+        self.config = {}
+        self.is_configured = False
+        self.is_token_valid = False
 
-# Functions to update the state
-def set_all_documents(docs: list):
-    global all_documents
-    all_documents = docs
+    def check_initial_config(self):
+        """
+        Checks if the initial configuration is valid based on loaded data.
+        Note: This does not validate the token, which is now handled at startup.
+        """
+        if self.config.get('alation_url') and self.config.get('access_token'):
+            self.is_configured = True
+        else:
+            self.is_configured = False
+            self.log_callback("⚠️ Config not found or incomplete. Please configure.")
 
-def set_all_available_templates(templates: list):
-    global all_available_templates
-    all_available_templates = templates
-
-def set_selected_hub(hub_id: int, hub_name: str):
-    global selected_hub_id
-    selected_hub_id = hub_id
-
-def set_selected_folder(folder_id: int, folder_name: str):
-    global selected_folder_id
-    selected_folder_id = folder_id
-
-def set_selected_template(template_id: int, template_details: dict):
-    global selected_template_id, selected_template_details
-    selected_template_id = template_id
-    selected_template_details = template_details
-
-def clear_selections():
-    global selected_hub_id, selected_folder_id, selected_template_id, selected_template_details
-    selected_hub_id = None
-    selected_folder_id = None
-    selected_template_id = None
-    selected_template_details = None
+    def save_new_config(self, new_config: dict):
+        """Saves a new configuration and updates the state."""
+        self.config = new_config
+        # The config_path needs to be managed appropriately, assuming a default path here
+        config_handler.save_config(config_handler.CONFIG_PATH, self.config)
+        self.log_callback("✅ Configuration saved.")
+        self.check_initial_config() # Re-check the config state
+        # Token validation will need to be re-triggered from the UI/main logic after this.
