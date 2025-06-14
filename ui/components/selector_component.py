@@ -95,6 +95,8 @@ class SelectorComponent(ttk.Frame):
         except (ValueError, TypeError):
             return
 
+        self.app_state.log_callback(f"--- Selections: Populating for Hub ID: {selected_hub_id} ---")
+
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id,
                                                      self.app_state.log_callback)
         folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
@@ -102,8 +104,15 @@ class SelectorComponent(ttk.Frame):
         self.folder_selector['values'] = folder_display_list
         if folder_display_list: self.folder_selector.set(folder_display_list[0])
 
-        template_ids_for_hub = {vc['template_id'] for vc in self.visual_configs if
-                                str(vc.get('collection_type_id')) == str(selected_hub_id)}
+        # --- START FIX ---
+        # Safely get template IDs from visual configs where the key exists
+        template_ids_for_hub = {
+            vc.get('template_id')
+            for vc in self.visual_configs
+            if vc.get('template_id') is not None and str(vc.get('collection_type_id')) == str(selected_hub_id)
+        }
+        # --- END FIX ---
+
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_for_hub]
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
@@ -113,10 +122,14 @@ class SelectorComponent(ttk.Frame):
         else:
             self.template_selector.set('')
 
+        self.app_state.log_callback(
+            f"✅ Selections: Found {len(folder_display_list) - 1} folders and {len(template_display_names)} compatible templates.")
+
     def _get_id_from_selection(self, selection_string: str) -> int:
         if not selection_string or "(ID:" not in selection_string: return None
         try:
-            return int(selection_string.split('(ID: ')[-1].replace(')', ''))
+            id_part = selection_string.split('(ID: ')[-1]
+            return int(id_part.replace(')', ''))
         except (ValueError, IndexError):
             return None
 
