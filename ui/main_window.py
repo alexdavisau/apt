@@ -8,8 +8,6 @@ from utils import alation_lookup, api_client, excel_writer, template_fetcher
 
 
 class MainApplication(ttk.Frame):
-    """The main application frame that contains all the primary UI elements."""
-
     def __init__(self, parent, config, is_token_valid, status_message):
         super().__init__(parent, padding="10")
         self.parent = parent
@@ -55,7 +53,6 @@ class MainApplication(ttk.Frame):
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
         self.excel_creator_frame.grid(row=0, column=0, sticky="nsew")
 
-        # Widgets for all frames
         self._create_main_menu_widgets()
         self._create_uploader_widgets()
         self._create_excel_creator_widgets()
@@ -168,6 +165,7 @@ class MainApplication(ttk.Frame):
 
     def _on_hub_selected(self, event=None):
         hub_selector = event.widget
+        # Sync the value between the two hub dropdowns
         if hub_selector == self.hub_selector:
             self.excel_hub_selector.set(hub_selector.get())
         else:
@@ -189,7 +187,6 @@ class MainApplication(ttk.Frame):
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
-
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
         self.template_selector['values'] = template_display_names
