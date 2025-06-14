@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-from utils import alation_lookup, api_client  # Import necessary utils
+from utils import alation_lookup, api_client
 
 
 class MainApplication(ttk.Frame):
@@ -12,18 +12,19 @@ class MainApplication(ttk.Frame):
 
     def __init__(self, parent, config, is_token_valid, status_message):
         super().__init__(parent, padding="10")
-
         self.parent = parent
 
         self.app_state = AppState(log_callback=self.log_to_console)
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
-        # --- Create Widgets ---
         self._create_menu()
-        self._create_main_widgets()  # Encapsulate widget creation
+        self._create_layout()
+        self._create_widgets()
 
-        # --- Initial Data Load ---
+        # Show the main menu frame first
+        self._show_frame(self.main_menu_frame)
+
         self.log_to_console(f"APT Initialized. {status_message}")
         if self.app_state.is_token_valid:
             self._load_initial_data()
@@ -43,47 +44,94 @@ class MainApplication(ttk.Frame):
         self.menu_bar.add_cascade(label="Tools", menu=tools_menu)
         tools_menu.add_command(label="Misc Tools", command=self.open_misc_tools_window)
 
-    def _create_main_widgets(self):
-        """Creates and arranges the primary widgets for the application."""
-        # --- Primary Tools Frame ---
-        tools_frame = ttk.LabelFrame(self, text="Primary Tools", padding="10")
-        tools_frame.pack(side=tk.TOP, fill=tk.X, expand=False)
-        tools_frame.columnconfigure(1, weight=1)
+    def _create_layout(self):
+        """Creates the main frames for the different UI states."""
+        self.main_menu_frame = ttk.Frame(self)
+        self.uploader_frame = ttk.Frame(self)
+        self.excel_creator_frame = ttk.Frame(self)
 
-        # Hub Selector
-        ttk.Label(tools_frame, text="Document Hub:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
-        self.hub_selector = ttk.Combobox(tools_frame, state="readonly")
-        self.hub_selector.grid(row=0, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+        # Place all frames in the same spot; we will show only one at a time.
+        self.main_menu_frame.grid(row=0, column=0, sticky="nsew")
+        self.uploader_frame.grid(row=0, column=0, sticky="nsew")
+        self.excel_creator_frame.grid(row=0, column=0, sticky="nsew")
 
-        # Template Selector
-        ttk.Label(tools_frame, text="Template:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
-        self.template_selector = ttk.Combobox(tools_frame, state="readonly")
-        self.template_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure(0, weight=1)
 
-        # File Selection
+    def _create_widgets(self):
+        """Creates widgets for all UI frames."""
+        # --- 1. Main Menu Widgets ---
+        menu_lf = ttk.LabelFrame(self.main_menu_frame, text="Core Functions", padding=10)
+        menu_lf.pack(expand=True, fill="both", padx=5, pady=5)
+
+        ttk.Button(menu_lf, text="Upload Documents", command=lambda: self._show_frame(self.uploader_frame)).pack(
+            pady=10, ipadx=10, ipady=5)
+        ttk.Button(menu_lf, text="Create Excel Template",
+                   command=lambda: self._show_frame(self.excel_creator_frame)).pack(pady=10, ipadx=10, ipady=5)
+
+        # --- 2. Uploader Widgets ---
+        uploader_lf = ttk.LabelFrame(self.uploader_frame, text="Upload Documents from File", padding=10)
+        uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
+        uploader_lf.columnconfigure(1, weight=1)
+
+        ttk.Button(uploader_lf, text="< Back to Menu", command=lambda: self._show_frame(self.main_menu_frame)).grid(
+            row=0, column=2, padx=5, pady=5, sticky="e")
+        ttk.Button(uploader_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
+                                                                                                   padx=5, pady=5,
+                                                                                                   sticky="w")
+
+        ttk.Label(uploader_lf, text="Document Hub:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.hub_selector = ttk.Combobox(uploader_lf, state="readonly")
+        self.hub_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+
+        ttk.Label(uploader_lf, text="Template:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+        self.template_selector = ttk.Combobox(uploader_lf, state="readonly")
+        self.template_selector.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+
         self.filepath_var = tk.StringVar()
-        ttk.Label(tools_frame, text="File to Upload:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
-        file_entry = ttk.Entry(tools_frame, textvariable=self.filepath_var, state="readonly")
-        file_entry.grid(row=2, column=1, padx=5, pady=5, sticky=tk.EW)
-        browse_button = ttk.Button(tools_frame, text="Browse...", command=self._select_file)
-        browse_button.grid(row=2, column=2, padx=5, pady=5)
+        ttk.Label(uploader_lf, text="File to Upload:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
+        ttk.Entry(uploader_lf, textvariable=self.filepath_var, state="readonly").grid(row=3, column=1, padx=5, pady=5,
+                                                                                      sticky=tk.EW)
+        ttk.Button(uploader_lf, text="Browse...", command=self._select_file).grid(row=3, column=2, padx=5, pady=5)
 
-        # Upload Button
-        self.upload_button = ttk.Button(tools_frame, text="Upload and Process File", command=self._upload_file,
-                                        state="disabled")
-        self.upload_button.grid(row=3, column=1, columnspan=2, pady=10)
+        self.upload_button = ttk.Button(uploader_lf, text="Upload and Process File", command=self._upload_file)
+        self.upload_button.grid(row=4, column=1, columnspan=2, pady=10)
 
-        # --- Log Console ---
+        # --- 3. Excel Creator Widgets ---
+        excel_lf = ttk.LabelFrame(self.excel_creator_frame, text="Create Validated Excel Template", padding=10)
+        excel_lf.pack(expand=True, fill="both", padx=5, pady=5)
+        excel_lf.columnconfigure(1, weight=1)
+
+        ttk.Button(excel_lf, text="< Back to Menu", command=lambda: self._show_frame(self.main_menu_frame)).grid(row=0,
+                                                                                                                 column=2,
+                                                                                                                 padx=5,
+                                                                                                                 pady=5,
+                                                                                                                 sticky="e")
+
+        ttk.Label(excel_lf, text="Select Template:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.excel_template_selector = ttk.Combobox(excel_lf, state="readonly")
+        self.excel_template_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+
+        ttk.Button(excel_lf, text="Create Excel File", command=self._create_validated_excel).grid(row=2, column=1,
+                                                                                                  columnspan=2, pady=10)
+
+        # --- 4. Log Console & Status Bar (Common to all frames) ---
         log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
-        log_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True, pady=5)
+        log_frame.grid(row=1, column=0, sticky="nsew", pady=5)
         log_frame.rowconfigure(0, weight=1)
         log_frame.columnconfigure(0, weight=1)
         self.log_console = scrolledtext.ScrolledText(log_frame, state='disabled', wrap=tk.WORD, height=10)
         self.log_console.grid(row=0, column=0, sticky="nsew")
 
-        # --- Status Bar ---
         self.status_bar = ttk.Label(self, text="Ready", relief=tk.SUNKEN, anchor=tk.W, padding="2")
-        self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
+        self.status_bar.grid(row=2, column=0, sticky="ew")
+
+        # Configure row weights for the main application frame
+        self.rowconfigure(1, weight=1)
+
+    def _show_frame(self, frame_to_show):
+        """Raises the selected frame to the top."""
+        frame_to_show.tkraise()
 
     def _load_initial_data(self):
         """Loads hubs and templates to populate the comboboxes."""
@@ -98,48 +146,43 @@ class MainApplication(ttk.Frame):
         if templates:
             template_names = [t.get('title', 'Untitled') for t in templates]
             self.template_selector['values'] = template_names
-
-        self.upload_button['state'] = 'normal'
+            self.excel_template_selector['values'] = template_names
 
     def _select_file(self):
-        """Opens a file dialog to select a file."""
         filepath = filedialog.askopenfilename(
-            title="Select a file",
-            filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv"), ("All files", "*.*"))
-        )
+            filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv"), ("All files", "*.*")))
         if filepath:
             self.filepath_var.set(filepath)
             self.log_to_console(f"Selected file: {filepath}")
 
     def _upload_file(self):
-        """Placeholder for the upload functionality."""
         hub = self.hub_selector.get()
         template = self.template_selector.get()
         filepath = self.filepath_var.get()
-
         if not all([hub, template, filepath]):
             messagebox.showwarning("Missing Information", "Please select a Hub, a Template, and a File to upload.")
             return
-
-        self.log_to_console("--- Starting Upload Process ---")
-        self.log_to_console(f"Hub: {hub}")
-        self.log_to_console(f"Template: {template}")
-        self.log_to_console(f"File: {filepath}")
-        self.log_to_console("NOTE: Actual upload logic is not yet implemented.")
+        self.log_to_console(f"--- Starting Upload: Hub='{hub}', Template='{template}', File='{filepath}' ---")
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
 
+    def _create_validated_excel(self):
+        template = self.excel_template_selector.get()
+        if not template:
+            messagebox.showwarning("Selection Required", "Please select a template first.")
+            return
+        self.log_to_console(f"--- Creating Excel for Template: '{template}' ---")
+        messagebox.showinfo("Not Implemented",
+                            "This will eventually create a validated Excel file based on the selected template's schema.")
+
     def open_config_window(self):
-        """Opens the configuration window."""
         config_win = config_window.ConfigWindow(self, self.app_state)
         config_win.grab_set()
 
     def open_misc_tools_window(self):
-        """Opens the miscellaneous tools window."""
         misc_win = misc_tools_window.MiscToolsWindow(self, self.app_state)
         misc_win.grab_set()
 
     def log_to_console(self, message):
-        """Appends a message to the log console in a thread-safe way."""
         self.status_bar.config(text=message)
         self.log_console.configure(state='normal')
         self.log_console.insert(tk.END, message + '\n')
