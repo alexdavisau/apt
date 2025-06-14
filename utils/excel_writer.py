@@ -12,14 +12,13 @@ def create_template_excel(visual_config: dict, hub_id: int, folder_id: int, outp
         log_callback("❌ Invalid visual_config provided to excel_writer.")
         return
 
-    # Extract fields from the layout's 'rendered_oid' section
     try:
-        # The fields are nested within the 'layout' -> 'layout' -> 'body' structure
+        # Fields are nested within the visual config's layout structure
         fields = visual_config.get('layout', {}).get('layout', {}).get('body', [])
         if not fields:
-            raise ValueError("No 'body' section in layout")
+            raise ValueError("No 'body' or 'layout' section found in visual config")
 
-        # The 'rendered_oid' contains the field definitions
+        # Extract the 'name' from each field definition
         headers = [field.get('name', 'Unnamed Field') for field in fields if 'name' in field]
 
     except (AttributeError, ValueError) as e:
