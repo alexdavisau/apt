@@ -20,9 +20,9 @@ class DocumentUploaderWindow(tk.Toplevel):
 
         self.app_state = app_state
 
-        # --- Data Stores for this window ---
-        self.all_templates = []
+        # Data stores for this window
         self.all_documents = []
+        self.all_templates = []
 
         self._create_widgets()
 
@@ -35,34 +35,34 @@ class DocumentUploaderWindow(tk.Toplevel):
         main_frame.pack(expand=True, fill="both")
         main_frame.columnconfigure(1, weight=1)
 
-        controls_lf = ttk.LabelFrame(main_frame, text="Upload Documents from File", padding=10)
-        controls_lf.grid(row=0, column=0, sticky="nsew")
-        controls_lf.columnconfigure(1, weight=1)
+        uploader_lf = ttk.LabelFrame(main_frame, text="Upload Documents from File", padding=10)
+        uploader_lf.grid(row=0, column=0, sticky="nsew")
+        uploader_lf.columnconfigure(1, weight=1)
 
-        ttk.Button(controls_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
+        ttk.Button(uploader_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
                                                                                                    padx=5, pady=5,
                                                                                                    sticky="w")
 
-        ttk.Label(controls_lf, text="Document Hub ID:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
-        self.hub_selector = ttk.Combobox(controls_lf, state="readonly")
+        ttk.Label(uploader_lf, text="Document Hub ID:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.hub_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.hub_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
         self.hub_selector.bind("<<ComboboxSelected>>", self._on_hub_selected)
 
-        ttk.Label(controls_lf, text="Folder:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
-        self.folder_selector = ttk.Combobox(controls_lf, state="readonly")
+        ttk.Label(uploader_lf, text="Folder:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+        self.folder_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.folder_selector.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
 
-        ttk.Label(controls_lf, text="Template:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
-        self.template_selector = ttk.Combobox(controls_lf, state="readonly")
+        ttk.Label(uploader_lf, text="Template:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
+        self.template_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.template_selector.grid(row=3, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
 
         self.filepath_var = tk.StringVar()
-        ttk.Label(controls_lf, text="File to Upload:").grid(row=4, column=0, padx=5, pady=5, sticky=tk.W)
-        ttk.Entry(controls_lf, textvariable=self.filepath_var, state="readonly").grid(row=4, column=1, padx=5, pady=5,
+        ttk.Label(uploader_lf, text="File to Upload:").grid(row=4, column=0, padx=5, pady=5, sticky=tk.W)
+        ttk.Entry(uploader_lf, textvariable=self.filepath_var, state="readonly").grid(row=4, column=1, padx=5, pady=5,
                                                                                       sticky=tk.EW)
-        ttk.Button(controls_lf, text="Browse...", command=self._select_file).grid(row=4, column=2, padx=5, pady=5)
+        ttk.Button(uploader_lf, text="Browse...", command=self._select_file).grid(row=4, column=2, padx=5, pady=5)
 
-        ttk.Button(controls_lf, text="Upload and Process File", command=self._upload_file).grid(row=5, column=1,
+        ttk.Button(uploader_lf, text="Upload and Process File", command=self._upload_file).grid(row=5, column=1,
                                                                                                 columnspan=2, pady=10)
 
     def _load_initial_data(self):

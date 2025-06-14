@@ -1,89 +1,130 @@
-# ui/main_window.py
+# ui/features/template_generator_window.py
 
 import tkinter as tk
-from tkinter import ttk, scrolledtext
+from tkinter import ttk, messagebox, filedialog
 from core.app_state import AppState
-from ui import config_window, misc_tools_window
-# Import our new feature window
-from ui.features import template_generator_window
+from utils import alation_lookup, api_client, excel_writer, visual_config_fetcher
 
 
-class MainApplication(ttk.Frame):
-    """The main application frame that acts as a menu to launch tools."""
+class TemplateGeneratorWindow(tk.Toplevel):
+    def __init__(self, parent, app_state: AppState):
+        super().__init__(parent)
+        self.title("Template Generator")
+        self.geometry("700x400")
+        self.transient(parent)
+        self.grab_set()
 
-    def __init__(self, parent, config, is_token_valid, status_message):
-        super().__init__(parent, padding="10")
-        self.parent = parent
+        self.app_state = app_state
 
-        # The AppState is passed to child windows, but the main window is now simpler.
-        self.app_state = AppState(log_callback=self.log_to_console)
-        self.app_state.config = config
-        self.app_state.is_token_valid = is_token_valid
+        self.visual_configs = []
+        self.all_templates = []
+        self.all_documents = []
 
-        self._create_menu()
         self._create_widgets()
 
-        self.log_to_console(f"APT Initialized. {status_message}")
-
-    def _create_menu(self):
-        self.menu_bar = tk.Menu(self.parent)
-        self.parent.config(menu=self.menu_bar)
-        file_menu = tk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="File", menu=file_menu)
-        file_menu.add_command(label="Configure", command=self.open_config_window)
-        file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.parent.quit)
-        tools_menu = tk.Menu(self.menu_bar, tearoff=0)
-        self.menu_bar.add_cascade(label="Tools", menu=tools_menu)
-        tools_menu.add_command(label="Misc Tools", command=self.open_misc_tools_window)
+        if self.app_state.is_token_valid:
+            self._load_initial_data()
 
     def _create_widgets(self):
-        """Creates the main menu buttons and the log console."""
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(0, weight=1)
+        main_frame = ttk.Frame(self, padding=10)
+        main_frame.pack(expand=True, fill="both")
+        main_frame.columnconfigure(1, weight=1)
 
-        # --- Main Menu Frame ---
-        main_menu_frame = ttk.LabelFrame(self, text="Core Functions", padding=10)
-        main_menu_frame.grid(row=0, column=0, sticky="new", padx=5, pady=5)
+        controls_lf = ttk.LabelFrame(main_frame, text="Create Validated Excel Template", padding=10)
+        controls_lf.grid(row=0, column=0, sticky="nsew")
+        controls_lf.columnconfigure(1, weight=1)
 
-        # --- Buttons to launch feature windows ---
-        ttk.Button(main_menu_frame, text="Generate Excel from Template", command=self.open_template_generator).pack(
-            pady=10, ipadx=10, ipady=5)
-        # Future buttons can be added here
-        # ttk.Button(main_menu_frame, text="Upload Documents", command=self.open_document_uploader).pack(pady=10, ipadx=10, ipady=5)
+        ttk.Button(controls_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
+                                                                                                   padx=5, pady=5,
+                                                                                                   sticky="w")
 
-        # --- Log Console ---
-        log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
-        log_frame.grid(row=1, column=0, sticky="nsew", padx=5, pady=5)
-        log_frame.rowconfigure(0, weight=1)
-        log_frame.columnconfigure(0, weight=1)
-        self.log_console = scrolledtext.ScrolledText(log_frame, state='disabled', wrap=tk.WORD, height=10)
-        self.log_console.grid(row=0, column=0, sticky="nsew")
+        ttk.Label(controls_lf, text="Document Hub ID:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.hub_selector = ttk.Combobox(controls_lf, state="readonly")
+        self.hub_selector.grid(row=1, column=1, padx=5, pady=5, sticky=tk.EW)
+        self.hub_selector.bind("<<ComboboxSelected>>", self._on_hub_selected)
 
-        # --- Status Bar ---
-        self.status_bar = ttk.Label(self, text="Ready", relief=tk.SUNKEN, anchor=tk.W, padding="2")
-        self.status_bar.grid(row=2, column=0, sticky="ew", padx=5, pady=5)
+        ttk.Label(controls_lf, text="Template:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+        self.template_selector = ttk.Combobox(controls_lf, state="readonly")
+        self.template_selector.grid(row=2, column=1, padx=5, pady=5, sticky=tk.EW)
 
-    def open_template_generator(self):
-        """Opens the Template Generator feature window."""
-        if not self.app_state.is_token_valid:
-            messagebox.showerror("Error", "Token is not valid. Please configure first.")
+        ttk.Button(controls_lf, text="Create Excel File", command=self._create_validated_excel).grid(row=3, column=1,
+                                                                                                     pady=10)
+
+    def _load_initial_data(self):
+        self.app_state.log_callback("--- Template Generator: Refreshing data ---")
+        self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.app_state.log_callback,
+                                                              force_fetch=True)
+        self.all_templates = api_client.get_all_templates(self.app_state.config, self.app_state.log_callback,
+                                                          force_api_fetch=True)
+        self.visual_configs = visual_config_fetcher.get_all_visual_configs(self.app_state.config,
+                                                                           self.app_state.log_callback)
+
+        if self.all_documents:
+            hub_ids = sorted(list(
+                set(doc['document_hub_id'] for doc in self.all_documents if doc.get('document_hub_id') is not None)))
+            self.hub_selector['values'] = hub_ids
+            self.app_state.log_callback(f"✅ Template Generator: Found {len(hub_ids)} unique Document Hub IDs.")
+        else:
+            self.app_state.log_callback("❌ Template Generator: No documents found.")
+
+        self.template_selector.set('')
+
+    def _on_hub_selected(self, event=None):
+        try:
+            selected_hub_id = int(self.hub_selector.get())
+        except (ValueError, TypeError):
             return
-        # Pass the app_state to the new window
-        win = template_generator_window.TemplateGeneratorWindow(self, self.app_state)
-        win.grab_set()
 
-    def open_config_window(self):
-        win = config_window.ConfigWindow(self, self.app_state)
-        win.grab_set()
+        self.app_state.log_callback(f"--- Template Generator: Populating for Hub ID: {selected_hub_id} ---")
 
-    def open_misc_tools_window(self):
-        win = misc_tools_window.MiscToolsWindow(self, self.app_state)
-        win.grab_set()
+        template_ids_for_hub = {vc['template_id'] for vc in self.visual_configs if
+                                str(vc.get('collection_type_id')) == str(selected_hub_id)}
+        compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_for_hub]
+        template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
-    def log_to_console(self, message):
-        self.status_bar.config(text=message)
-        self.log_console.configure(state='normal')
-        self.log_console.insert(tk.END, message + '\n')
-        self.log_console.configure(state='disabled')
-        self.log_console.see(tk.END)
+        self.template_selector['values'] = template_display_names
+        if template_display_names:
+            self.template_selector.set(template_display_names[0])
+        else:
+            self.template_selector.set('')
+
+        self.app_state.log_callback(f"✅ Template Generator: Found {len(template_display_names)} compatible templates.")
+
+    def _get_id_from_selection(self, selection_string: str) -> int:
+        if not selection_string or "(ID:" not in selection_string:
+            return None
+        try:
+            return int(selection_string.split('(ID: ')[-1].replace(')', ''))
+        except (ValueError, IndexError):
+            return None
+
+    def _create_validated_excel(self):
+        try:
+            hub_id = int(self.hub_selector.get())
+        except (ValueError, TypeError):
+            hub_id = None
+
+        template_id = self._get_id_from_selection(self.template_selector.get())
+
+        if not all([hub_id, template_id]):
+            messagebox.showwarning("Selection Required", "Please select a Hub and Template first.", parent=self)
+            return
+
+        visual_config_obj = next((vc for vc in self.visual_configs if vc.get('template_id') == template_id), None)
+
+        if not visual_config_obj:
+            messagebox.showerror("Error", f"Could not find Visual Config for Template ID {template_id}.", parent=self)
+            return
+
+        output_path = filedialog.asksaveasfilename(
+            title="Save Validated Excel File",
+            defaultextension=".xlsx",
+            filetypes=[("Excel Workbook", "*.xlsx")],
+            initialfile=f"template_{template_id}_upload.xlsx"
+        )
+
+        if not output_path:
+            self.app_state.log_callback("Operation cancelled by user.")
+            return
+
+        excel_writer.create_template_excel(visual_config_obj, hub_id, hub_id, output_path, self.app_state.log_callback)

@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-# Import our feature windows
+# Import both feature windows
 from ui.features import template_generator_window
 from ui.features import document_uploader_window
 
