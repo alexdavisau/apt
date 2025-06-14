@@ -77,37 +77,31 @@ class MainApplication(ttk.Frame):
         uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
 
-        # Row 0: Buttons
         ttk.Button(uploader_lf, text="< Back to Menu", command=lambda: self._show_frame(self.main_menu_frame)).grid(
             row=0, column=2, padx=5, pady=5, sticky="e")
         ttk.Button(uploader_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0,
                                                                                                    padx=5, pady=5,
                                                                                                    sticky="w")
 
-        # Row 1: Hub Selector
         ttk.Label(uploader_lf, text="Document Hub ID:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
         self.hub_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.hub_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
         self.hub_selector.bind("<<ComboboxSelected>>", self._on_hub_selected)
 
-        # Row 2: Folder Selector
         ttk.Label(uploader_lf, text="Folder:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
         self.folder_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.folder_selector.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
 
-        # Row 3: Template Selector
         ttk.Label(uploader_lf, text="Template:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
         self.template_selector = ttk.Combobox(uploader_lf, state="readonly")
         self.template_selector.grid(row=3, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
 
-        # Row 4: File Selection
         self.filepath_var = tk.StringVar()
         ttk.Label(uploader_lf, text="File to Upload:").grid(row=4, column=0, padx=5, pady=5, sticky=tk.W)
         ttk.Entry(uploader_lf, textvariable=self.filepath_var, state="readonly").grid(row=4, column=1, padx=5, pady=5,
                                                                                       sticky=tk.EW)
         ttk.Button(uploader_lf, text="Browse...", command=self._select_file).grid(row=4, column=2, padx=5, pady=5)
 
-        # Row 5: Upload Button
         self.upload_button = ttk.Button(uploader_lf, text="Upload and Process File", command=self._upload_file)
         self.upload_button.grid(row=5, column=1, columnspan=2, pady=10)
 
@@ -188,14 +182,21 @@ class MainApplication(ttk.Frame):
 
         self.folder_selector['values'] = folder_display_list
         self.excel_folder_selector['values'] = folder_display_list
+        if folder_display_list:
+            self.folder_selector.set(folder_display_list[0])
+            self.excel_folder_selector.set(folder_display_list[0])
 
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
+
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
         self.template_selector['values'] = template_display_names
         self.excel_template_selector['values'] = template_display_names
+        if template_display_names:
+            self.template_selector.set(template_display_names[0])
+            self.excel_template_selector.set(template_display_names[0])
 
         self.log_to_console(
             f"✅ Found {len(folder_display_list) - 1} folders and {len(template_display_names)} compatible templates.")
@@ -209,7 +210,6 @@ class MainApplication(ttk.Frame):
         if not selection_string or "(ID:" not in selection_string:
             return None
         try:
-            # Handle both "Title (ID: 123)" and "Hub Root (ID: 123)"
             id_part = selection_string.split('(ID: ')[-1]
             return int(id_part.replace(')', ''))
         except (ValueError, IndexError):
