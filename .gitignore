@@ -14,3 +14,5 @@ ui/features/__pycache__/document_uploader_window.cpython-312.pyc
 ui/features/__pycache__/template_generator_window.cpython-312.pyc
 ui/features/__pycache__/template_generator_window.cpython-312.pyc
 /ui/features/__pycache__
+/cache
+*.pyc
