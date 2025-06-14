@@ -13,8 +13,13 @@ def get_template_details(config: dict, template_id: int, log_callback=print) -> 
     log_callback(f"🔍 Fetching full details for Template ID: {template_id}...")
     url = f"{config['alation_url'].rstrip('/')}/integration/v1/custom_template/{template_id}/"
 
-    response = _make_api_request_with_retry("GET", url, config, token_refresher=refresh_access_token,
-                                            log_callback=log_callback)
+    response = _make_api_request_with_retry(
+        "GET",
+        url,
+        config,
+        token_refresher=refresh_access_token,
+        log_callback=log_callback
+    )
 
     if response and response.status_code == 200:
         template_details = response.json()

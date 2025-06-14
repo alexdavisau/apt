@@ -4,34 +4,45 @@ import openpyxl
 from tkinter import messagebox
 
 
-def create_template_excel(template_details: dict, hub_id: int, folder_id: int, output_path: str, log_callback=print):
+def create_template_excel(visual_config: dict, hub_id: int, folder_id: int, output_path: str, log_callback=print):
     """
-    Creates an Excel file with headers based on an Alation template's custom fields
-    and includes a hidden sheet with metadata.
+    Creates an Excel file with headers based on a template's visual configuration.
     """
-    if not template_details or 'custom_fields' not in template_details:
-        log_callback("❌ Invalid template details provided to excel_writer.")
-        messagebox.showerror("Error", "Invalid template details passed to Excel writer.")
+    if not visual_config:
+        log_callback("❌ Invalid visual_config provided to excel_writer.")
         return
 
-    custom_fields = template_details.get('custom_fields', [])
-    if not custom_fields:
-        log_callback("⚠️ The selected template has no custom fields to create columns.")
-        messagebox.showwarning("Warning", "The selected template has no custom fields.")
+    # Extract fields from the layout's 'rendered_oid' section
+    try:
+        # The fields are nested within the 'layout' -> 'layout' -> 'body' structure
+        fields = visual_config.get('layout', {}).get('layout', {}).get('body', [])
+        if not fields:
+            raise ValueError("No 'body' section in layout")
+
+        # The 'rendered_oid' contains the field definitions
+        headers = [field.get('name', 'Unnamed Field') for field in fields if 'name' in field]
+
+    except (AttributeError, ValueError) as e:
+        log_callback(f"❌ Could not parse fields from visual config: {e}")
+        messagebox.showerror("Error", "Could not parse fields from the selected template's visual configuration.")
         return
 
-    headers = [field.get('name', 'Unnamed Field') for field in custom_fields]
-    template_id = template_details.get('id')
+    if not headers:
+        log_callback("⚠️ The selected template's visual config has no fields to create columns.")
+        messagebox.showwarning("Warning", "The selected template has no fields defined in its layout.")
+        return
+
+    template_id = visual_config.get('template_id')
 
     try:
         workbook = openpyxl.Workbook()
         sheet = workbook.active
         sheet.title = "Alation Upload"
         sheet.append(headers)
+        log_callback(f"Generated headers: {headers}")
 
         metadata_sheet = workbook.create_sheet(title="_apt_metadata")
         metadata_sheet.sheet_state = 'hidden'
-
         metadata_sheet['A1'] = "Source Hub ID"
         metadata_sheet['B1'] = hub_id
         metadata_sheet['A2'] = "Source Folder ID"
