@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-# Import both feature windows
-from ui.features import template_generator_window
-from ui.features import document_uploader_window
+# CORRECTED: Import the new feature window classes directly
+from ui.features.template_generator_window import TemplateGeneratorWindow
+from ui.features.document_uploader_window import DocumentUploaderWindow
 
 
 class MainApplication(ttk.Frame):
@@ -71,11 +71,11 @@ class MainApplication(ttk.Frame):
 
     def open_template_generator(self):
         """Opens the Template Generator feature window."""
-        self._open_feature_window(template_generator_window.TemplateGeneratorWindow)
+        self._open_feature_window(TemplateGeneratorWindow)
 
     def open_document_uploader(self):
         """Opens the Document Uploader feature window."""
-        self._open_feature_window(document_uploader_window.DocumentUploaderWindow)
+        self._open_feature_window(DocumentUploaderWindow)
 
     def open_config_window(self):
         win = config_window.ConfigWindow(self, self.app_state)
