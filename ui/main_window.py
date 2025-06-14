@@ -2,6 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog
+import json  # Import json for pretty-printing
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
 from utils import alation_lookup, api_client, excel_writer, visual_config_fetcher
@@ -64,7 +65,6 @@ class MainApplication(ttk.Frame):
         frame_to_show.tkraise()
 
     def _create_main_menu_widgets(self):
-        # This method is unchanged
         menu_lf = ttk.LabelFrame(self.main_menu_frame, text="Core Functions", padding=10)
         menu_lf.pack(expand=True, fill="both", padx=5, pady=5)
         ttk.Button(menu_lf, text="Upload Documents", command=lambda: self._show_frame(self.uploader_frame)).pack(
@@ -72,8 +72,11 @@ class MainApplication(ttk.Frame):
         ttk.Button(menu_lf, text="Create Excel Template",
                    command=lambda: self._show_frame(self.excel_creator_frame)).pack(pady=10, ipadx=10, ipady=5)
 
+        # --- DEBUG BUTTON ---
+        ttk.Button(menu_lf, text="Debug: Print Visual Config", command=self._debug_print_visual_config).pack(pady=20)
+
     def _create_uploader_widgets(self):
-        # This method is unchanged, it includes the Folder dropdown
+        # This method is unchanged
         uploader_lf = ttk.LabelFrame(self.uploader_frame, text="Upload Documents from File", padding=10)
         uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
@@ -101,7 +104,7 @@ class MainApplication(ttk.Frame):
         self.upload_button.grid(row=5, column=1, columnspan=2, pady=10)
 
     def _create_excel_creator_widgets(self):
-        # This method is unchanged, it includes the Folder dropdown
+        # This method is unchanged
         excel_lf = ttk.LabelFrame(self.excel_creator_frame, text="Create Validated Excel Template", padding=10)
         excel_lf.pack(expand=True, fill="both", padx=5, pady=5)
         excel_lf.columnconfigure(1, weight=1)
@@ -137,7 +140,7 @@ class MainApplication(ttk.Frame):
         self.status_bar.grid(row=2, column=0, sticky="ew")
 
     def _load_initial_data(self):
-        """Loads all data sources and populates the initial Hub dropdown."""
+        # This method is unchanged
         self.log_to_console("--- Refreshing all data from Alation ---")
         self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console,
                                                               force_fetch=True)
@@ -145,7 +148,6 @@ class MainApplication(ttk.Frame):
                                                           force_api_fetch=True)
         self.visual_configs = visual_config_fetcher.get_all_visual_configs(self.app_state.config, self.log_to_console)
 
-        # CORRECTED LOGIC: Get Hub IDs from the document list
         if self.all_documents:
             hub_ids = sorted(list(
                 set(doc['document_hub_id'] for doc in self.all_documents if doc.get('document_hub_id') is not None)))
@@ -161,21 +163,17 @@ class MainApplication(ttk.Frame):
         self.excel_template_selector.set('')
 
     def _on_hub_selected(self, event=None):
-        """Callback when a hub is selected. Populates folders and templates."""
+        # This method is unchanged
         hub_selector = event.widget
         if hub_selector == self.hub_selector:
             self.excel_hub_selector.set(hub_selector.get())
         else:
             self.hub_selector.set(hub_selector.get())
-
         try:
             selected_hub_id = int(hub_selector.get())
         except (ValueError, TypeError):
             return
-
         self.log_to_console(f"--- Populating for Hub ID: {selected_hub_id} ---")
-
-        # 1. Populate Folders
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
         folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
         folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
@@ -184,13 +182,10 @@ class MainApplication(ttk.Frame):
         if folder_display_list:
             self.folder_selector.set(folder_display_list[0])
             self.excel_folder_selector.set(folder_display_list[0])
-
-        # 2. Populate Templates using Visual Config data
         template_ids_for_hub = {vc['template_id'] for vc in self.visual_configs if
                                 str(vc.get('collection_type_id')) == str(selected_hub_id)}
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_for_hub]
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
-
         self.template_selector['values'] = template_display_names
         self.excel_template_selector['values'] = template_display_names
         if template_display_names:
@@ -199,7 +194,6 @@ class MainApplication(ttk.Frame):
         else:
             self.template_selector.set('')
             self.excel_template_selector.set('')
-
         self.log_to_console(
             f"✅ Found {len(folder_display_list) - 1} folders and {len(template_display_names)} compatible templates.")
 
@@ -217,23 +211,18 @@ class MainApplication(ttk.Frame):
             hub_id = int(self.excel_hub_selector.get())
         except (ValueError, TypeError):
             hub_id = None
-
         folder_id = self._get_id_from_selection(self.excel_folder_selector.get())
         template_id = self._get_id_from_selection(self.excel_template_selector.get())
-
         if not all([hub_id, folder_id, template_id]):
             messagebox.showwarning("Selection Required", "Please select a Hub, Folder, and Template first.",
                                    parent=self)
             return
-
         visual_config_obj = next((vc for vc in self.visual_configs if vc.get('template_id') == template_id), None)
-
         if not visual_config_obj:
             messagebox.showerror("Error",
                                  f"Could not find Visual Config for Template ID {template_id}. The template may not be configured for this Hub.",
                                  parent=self)
             return
-
         output_path = filedialog.asksaveasfilename(
             title="Save Validated Excel File", defaultextension=".xlsx",
             filetypes=[("Excel Workbook", "*.xlsx")],
@@ -243,6 +232,17 @@ class MainApplication(ttk.Frame):
             self.log_to_console("Operation cancelled by user.")
             return
         excel_writer.create_template_excel(visual_config_obj, hub_id, folder_id, output_path, self.log_to_console)
+
+    def _debug_print_visual_config(self):
+        """Prints the first visual config object to the log for debugging."""
+        self.log_to_console("\n--- DEBUG: First Visual Config Object ---")
+        if self.visual_configs:
+            # Use json.dumps for pretty-printing the dictionary
+            pretty_json = json.dumps(self.visual_configs[0], indent=2)
+            self.log_to_console(pretty_json)
+        else:
+            self.log_to_console("No visual configs loaded to debug.")
+        self.log_to_console("--- END DEBUG ---")
 
     # --- Other methods remain unchanged ---
     def _select_file(self):
