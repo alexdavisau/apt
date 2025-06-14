@@ -13,25 +13,25 @@ def create_template_excel(visual_config: dict, hub_id: int, folder_id: int, outp
         return
 
     try:
-        # Fields are nested within the visual config's layout structure
-        fields = visual_config.get('layout', {}).get('layout', {}).get('body', [])
-        if not fields:
-            raise ValueError("No 'body' or 'layout' section found in visual config")
+        # CORRECTED LOGIC: Fields are in the 'component_list_in_config'
+        components = visual_config.get('component_list_in_config', [])
 
-        # Extract the 'name' from each field definition
-        headers = [field.get('name', 'Unnamed Field') for field in fields if 'name' in field]
+        # We need the full template details to get field names from the IDs (rendered_oid)
+        # This information is not in the visual config. We will need to fetch it.
+        # For now, we will create a placeholder. This logic needs to be completed.
 
-    except (AttributeError, ValueError) as e:
+        # Placeholder: a real implementation would look up the field name from the rendered_oid
+        headers = [f"Field ID: {comp.get('rendered_oid')}" for comp in components if
+                   comp.get('rendered_otype') == 'CUSTOM_FIELD']
+
+    except Exception as e:
         log_callback(f"❌ Could not parse fields from visual config: {e}")
-        messagebox.showerror("Error", "Could not parse fields from the selected template's visual configuration.")
+        messagebox.showerror("Error", "Could not parse fields from the template's visual configuration.")
         return
 
     if not headers:
-        log_callback("⚠️ The selected template's visual config has no fields to create columns.")
-        messagebox.showwarning("Warning", "The selected template has no fields defined in its layout.")
+        messagebox.showwarning("Warning", "The selected template has no custom fields defined in its layout.")
         return
-
-    template_id = visual_config.get('template_id')
 
     try:
         workbook = openpyxl.Workbook()
@@ -46,8 +46,8 @@ def create_template_excel(visual_config: dict, hub_id: int, folder_id: int, outp
         metadata_sheet['B1'] = hub_id
         metadata_sheet['A2'] = "Source Folder ID"
         metadata_sheet['B2'] = folder_id
-        metadata_sheet['A3'] = "Source Template ID"
-        metadata_sheet['B3'] = template_id
+        metadata_sheet['A3'] = "Source Template Title"
+        metadata_sheet['B3'] = visual_config.get('title', 'Unknown')
 
         workbook.save(output_path)
         log_callback(f"✅ Successfully created validated Excel file at: {output_path}")
