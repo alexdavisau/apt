@@ -8,6 +8,8 @@ from utils import alation_lookup, api_client, excel_writer, template_fetcher
 
 
 class MainApplication(ttk.Frame):
+    """The main application frame that contains all the primary UI elements."""
+
     def __init__(self, parent, config, is_token_valid, status_message):
         super().__init__(parent, padding="10")
         self.parent = parent
@@ -53,6 +55,7 @@ class MainApplication(ttk.Frame):
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
         self.excel_creator_frame.grid(row=0, column=0, sticky="nsew")
 
+        # Widgets for all frames
         self._create_main_menu_widgets()
         self._create_uploader_widgets()
         self._create_excel_creator_widgets()
@@ -165,7 +168,6 @@ class MainApplication(ttk.Frame):
 
     def _on_hub_selected(self, event=None):
         hub_selector = event.widget
-        # Sync the value between the two hub dropdowns
         if hub_selector == self.hub_selector:
             self.excel_hub_selector.set(hub_selector.get())
         else:
@@ -187,6 +189,7 @@ class MainApplication(ttk.Frame):
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
+
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
         self.template_selector['values'] = template_display_names
@@ -194,6 +197,9 @@ class MainApplication(ttk.Frame):
         if template_display_names:
             self.template_selector.set(template_display_names[0])
             self.excel_template_selector.set(template_display_names[0])
+        else:
+            self.template_selector.set('')
+            self.excel_template_selector.set('')
 
         self.log_to_console(
             f"✅ Found {len(folder_display_list) - 1} folders and {len(template_display_names)} compatible templates.")
@@ -204,6 +210,7 @@ class MainApplication(ttk.Frame):
             self.filepath_var.set(filepath)
 
     def _get_id_from_selection(self, selection_string: str) -> int:
+        """Parses an ID from a display string like 'Title (ID: 123)'."""
         if not selection_string or "(ID:" not in selection_string:
             return None
         try:
@@ -216,13 +223,20 @@ class MainApplication(ttk.Frame):
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
 
     def _create_validated_excel(self):
+        """Fetches full template details and calls the excel writer utility."""
         hub_id = self._get_id_from_selection(self.excel_hub_selector.get())
         folder_id = self._get_id_from_selection(self.excel_folder_selector.get())
         template_id = self._get_id_from_selection(self.excel_template_selector.get())
 
-        if not all([hub_id, folder_id, template_id]):
-            messagebox.showwarning("Selection Required", "Please select a Hub, Folder, and Template first.",
-                                   parent=self)
+        # More explicit check to see what is failing
+        if hub_id is None:
+            messagebox.showwarning("Selection Required", "A Document Hub ID must be selected.", parent=self)
+            return
+        if folder_id is None:
+            messagebox.showwarning("Selection Required", "A Folder must be selected.", parent=self)
+            return
+        if template_id is None:
+            messagebox.showwarning("Selection Required", "A Template must be selected.", parent=self)
             return
 
         template_details = template_fetcher.get_template_details(self.app_state.config, template_id,
