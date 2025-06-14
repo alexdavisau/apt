@@ -16,6 +16,7 @@ class MainApplication(ttk.Frame):
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
+        # --- Data Stores ---
         self.visual_configs = []
         self.all_templates = []
         self.all_documents = []
@@ -29,7 +30,7 @@ class MainApplication(ttk.Frame):
             self._load_initial_data()
 
     def _create_menu(self):
-        # ... (This method is unchanged)
+        # This method is unchanged
         self.menu_bar = tk.Menu(self.parent)
         self.parent.config(menu=self.menu_bar)
         file_menu = tk.Menu(self.menu_bar, tearoff=0)
@@ -42,7 +43,7 @@ class MainApplication(ttk.Frame):
         tools_menu.add_command(label="Misc Tools", command=self.open_misc_tools_window)
 
     def _create_layout_and_widgets(self):
-        # ... (This method is unchanged)
+        # This method is unchanged
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
         main_container = ttk.Frame(self)
@@ -59,11 +60,11 @@ class MainApplication(ttk.Frame):
         self._create_common_widgets()
 
     def _show_frame(self, frame_to_show):
-        # ... (This method is unchanged)
+        # This method is unchanged
         frame_to_show.tkraise()
 
     def _create_main_menu_widgets(self):
-        # ... (This method is unchanged)
+        # This method is unchanged
         menu_lf = ttk.LabelFrame(self.main_menu_frame, text="Core Functions", padding=10)
         menu_lf.pack(expand=True, fill="both", padx=5, pady=5)
         ttk.Button(menu_lf, text="Upload Documents", command=lambda: self._show_frame(self.uploader_frame)).pack(
@@ -72,7 +73,7 @@ class MainApplication(ttk.Frame):
                    command=lambda: self._show_frame(self.excel_creator_frame)).pack(pady=10, ipadx=10, ipady=5)
 
     def _create_uploader_widgets(self):
-        # ... (This method is unchanged, including folder dropdown)
+        # This method is unchanged, it includes the Folder dropdown
         uploader_lf = ttk.LabelFrame(self.uploader_frame, text="Upload Documents from File", padding=10)
         uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
@@ -100,7 +101,7 @@ class MainApplication(ttk.Frame):
         self.upload_button.grid(row=5, column=1, columnspan=2, pady=10)
 
     def _create_excel_creator_widgets(self):
-        # ... (This method is unchanged, including folder dropdown)
+        # This method is unchanged, it includes the Folder dropdown
         excel_lf = ttk.LabelFrame(self.excel_creator_frame, text="Create Validated Excel Template", padding=10)
         excel_lf.pack(expand=True, fill="both", padx=5, pady=5)
         excel_lf.columnconfigure(1, weight=1)
@@ -125,7 +126,7 @@ class MainApplication(ttk.Frame):
                                                                                                   columnspan=2, pady=10)
 
     def _create_common_widgets(self):
-        # ... (This method is unchanged)
+        # This method is unchanged
         log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
         log_frame.grid(row=1, column=0, sticky="nsew", pady=5)
         log_frame.rowconfigure(0, weight=1)
@@ -138,15 +139,13 @@ class MainApplication(ttk.Frame):
     def _load_initial_data(self):
         """Loads all data sources and populates the initial Hub dropdown."""
         self.log_to_console("--- Refreshing all data from Alation ---")
-        # The working method for getting hubs is from the document list
         self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console,
                                                               force_fetch=True)
-        # We need templates for their titles
         self.all_templates = api_client.get_all_templates(self.app_state.config, self.log_to_console,
                                                           force_api_fetch=True)
-        # We need visual configs for the hub->template mapping and field layouts
         self.visual_configs = visual_config_fetcher.get_all_visual_configs(self.app_state.config, self.log_to_console)
 
+        # CORRECTED LOGIC: Get Hub IDs from the document list
         if self.all_documents:
             hub_ids = sorted(list(
                 set(doc['document_hub_id'] for doc in self.all_documents if doc.get('document_hub_id') is not None)))
@@ -156,7 +155,6 @@ class MainApplication(ttk.Frame):
         else:
             self.log_to_console("❌ No documents found.")
 
-        # Clear dependent dropdowns
         self.folder_selector.set('');
         self.template_selector.set('')
         self.excel_folder_selector.set('');
@@ -165,7 +163,6 @@ class MainApplication(ttk.Frame):
     def _on_hub_selected(self, event=None):
         """Callback when a hub is selected. Populates folders and templates."""
         hub_selector = event.widget
-        # Sync the other hub selector
         if hub_selector == self.hub_selector:
             self.excel_hub_selector.set(hub_selector.get())
         else:
@@ -178,7 +175,7 @@ class MainApplication(ttk.Frame):
 
         self.log_to_console(f"--- Populating for Hub ID: {selected_hub_id} ---")
 
-        # 1. Populate Folders (This logic is correct and remains)
+        # 1. Populate Folders
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
         folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
         folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
@@ -188,9 +185,9 @@ class MainApplication(ttk.Frame):
             self.folder_selector.set(folder_display_list[0])
             self.excel_folder_selector.set(folder_display_list[0])
 
-        # 2. Populate Templates using the Visual Config data
+        # 2. Populate Templates using Visual Config data
         template_ids_for_hub = {vc['template_id'] for vc in self.visual_configs if
-                                vc.get('collection_type_id') == selected_hub_id}
+                                str(vc.get('collection_type_id')) == str(selected_hub_id)}
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_for_hub]
         template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
 
@@ -207,6 +204,7 @@ class MainApplication(ttk.Frame):
             f"✅ Found {len(folder_display_list) - 1} folders and {len(template_display_names)} compatible templates.")
 
     def _get_id_from_selection(self, selection_string: str) -> int:
+        # This method is unchanged
         if not selection_string or "(ID:" not in selection_string: return None
         try:
             return int(selection_string.split('(ID: ')[-1].replace(')', ''))
@@ -214,6 +212,7 @@ class MainApplication(ttk.Frame):
             return None
 
     def _create_validated_excel(self):
+        # This method is unchanged
         try:
             hub_id = int(self.excel_hub_selector.get())
         except (ValueError, TypeError):
@@ -227,7 +226,6 @@ class MainApplication(ttk.Frame):
                                    parent=self)
             return
 
-        # Find the visual config object that corresponds to our selected template
         visual_config_obj = next((vc for vc in self.visual_configs if vc.get('template_id') == template_id), None)
 
         if not visual_config_obj:
@@ -237,23 +235,19 @@ class MainApplication(ttk.Frame):
             return
 
         output_path = filedialog.asksaveasfilename(
-            title="Save Validated Excel File",
-            defaultextension=".xlsx",
+            title="Save Validated Excel File", defaultextension=".xlsx",
             filetypes=[("Excel Workbook", "*.xlsx")],
             initialfile=f"template_{template_id}_upload.xlsx"
         )
-
         if not output_path:
             self.log_to_console("Operation cancelled by user.")
             return
-
         excel_writer.create_template_excel(visual_config_obj, hub_id, folder_id, output_path, self.log_to_console)
 
-    # ... (Keep other methods like _select_file, _upload_file, open_..._window, log_to_console) ...
+    # --- Other methods remain unchanged ---
     def _select_file(self):
         filepath = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")))
-        if filepath:
-            self.filepath_var.set(filepath)
+        if filepath: self.filepath_var.set(filepath)
 
     def _upload_file(self):
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
