@@ -18,6 +18,7 @@ class MainApplication(ttk.Frame):
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
 
+        self.all_hubs = []
         self.all_templates = []
         self.all_documents = []
 
@@ -50,16 +51,21 @@ class MainApplication(ttk.Frame):
         main_container.grid(row=0, column=0, sticky="new")
         self.main_menu_frame = ttk.Frame(main_container)
         self.uploader_frame = ttk.Frame(main_container)
+        self.excel_creator_frame = ttk.Frame(main_container)  # Added frame for excel creator
+
         self.main_menu_frame.grid(row=0, column=0, sticky="nsew")
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
+        self.excel_creator_frame.grid(row=0, column=0, sticky="nsew")
 
-        # --- Main Menu Widgets ---
+        # --- 1. Main Menu Widgets ---
         menu_lf = ttk.LabelFrame(self.main_menu_frame, text="Core Functions", padding=10)
         menu_lf.pack(expand=True, fill="both", padx=5, pady=5)
         ttk.Button(menu_lf, text="Upload Documents", command=lambda: self._show_frame(self.uploader_frame)).pack(
             pady=10, ipadx=10, ipady=5)
+        ttk.Button(menu_lf, text="Create Excel Template",
+                   command=lambda: self._show_frame(self.excel_creator_frame)).pack(pady=10, ipadx=10, ipady=5)
 
-        # --- Uploader Widgets ---
+        # --- 2. Uploader Widgets ---
         uploader_lf = ttk.LabelFrame(self.uploader_frame, text="Upload Documents from File", padding=10)
         uploader_lf.pack(expand=True, fill="both", padx=5, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
@@ -92,7 +98,36 @@ class MainApplication(ttk.Frame):
         self.upload_button = ttk.Button(uploader_lf, text="Upload and Process File", command=self._upload_file)
         self.upload_button.grid(row=5, column=1, columnspan=2, pady=10)
 
-        # --- Log Console & Status Bar ---
+        # --- 3. Excel Creator Widgets ---
+        excel_lf = ttk.LabelFrame(self.excel_creator_frame, text="Create Validated Excel Template", padding=10)
+        excel_lf.pack(expand=True, fill="both", padx=5, pady=5)
+        excel_lf.columnconfigure(1, weight=1)
+
+        ttk.Button(excel_lf, text="< Back to Menu", command=lambda: self._show_frame(self.main_menu_frame)).grid(row=0,
+                                                                                                                 column=2,
+                                                                                                                 padx=5,
+                                                                                                                 pady=5,
+                                                                                                                 sticky="e")
+        ttk.Button(excel_lf, text="Refresh Alation Data", command=self._load_initial_data).grid(row=0, column=0, padx=5,
+                                                                                                pady=5, sticky="w")
+
+        ttk.Label(excel_lf, text="Document Hub ID:").grid(row=1, column=0, padx=5, pady=5, sticky=tk.W)
+        self.excel_hub_selector = ttk.Combobox(excel_lf, state="readonly")
+        self.excel_hub_selector.grid(row=1, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+        self.excel_hub_selector.bind("<<ComboboxSelected>>", self._on_hub_selected)
+
+        ttk.Label(excel_lf, text="Folder:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
+        self.excel_folder_selector = ttk.Combobox(excel_lf, state="readonly")
+        self.excel_folder_selector.grid(row=2, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+
+        ttk.Label(excel_lf, text="Template:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
+        self.excel_template_selector = ttk.Combobox(excel_lf, state="readonly")
+        self.excel_template_selector.grid(row=3, column=1, columnspan=2, padx=5, pady=5, sticky=tk.EW)
+
+        ttk.Button(excel_lf, text="Create Excel File", command=self._create_validated_excel).grid(row=4, column=1,
+                                                                                                  columnspan=2, pady=10)
+
+        # --- 4. Log Console & Status Bar (Common) ---
         log_frame = ttk.LabelFrame(self, text="Log Console", padding="5")
         log_frame.grid(row=1, column=0, sticky="nsew", pady=5)
         log_frame.rowconfigure(0, weight=1)
@@ -104,10 +139,11 @@ class MainApplication(ttk.Frame):
         self.status_bar.grid(row=2, column=0, sticky="ew")
 
     def _show_frame(self, frame_to_show):
+        """Raises the selected frame to the top."""
         frame_to_show.tkraise()
 
     def _load_initial_data(self):
-        """Loads all necessary data from Alation and populates the initial Hub ID dropdown."""
+        """Loads all necessary data from Alation and populates the initial Hub dropdowns."""
         self.log_to_console("--- Refreshing all data from Alation ---")
         self.all_documents = alation_lookup.get_all_documents(self.app_state.config, self.log_to_console,
                                                               force_fetch=True)
@@ -115,24 +151,34 @@ class MainApplication(ttk.Frame):
                                                           force_api_fetch=True)
 
         if self.all_documents:
-            # CORRECTED LOGIC: Extract unique document_hub_id values from all documents.
-            hub_ids = sorted(list(set(
-                doc['document_hub_id']
-                for doc in self.all_documents if doc.get('document_hub_id') is not None
-            )))
+            hub_ids = sorted(list(
+                set(doc['document_hub_id'] for doc in self.all_documents if doc.get('document_hub_id') is not None)))
             self.hub_selector['values'] = hub_ids
+            self.excel_hub_selector['values'] = hub_ids  # Also populate the excel creator hub selector
             self.log_to_console(f"✅ Found {len(hub_ids)} unique Document Hub IDs. Please select one.")
         else:
             self.log_to_console("❌ No documents found, cannot populate Hub IDs.")
-            self.hub_selector['values'] = []
 
-        self.folder_selector.set('')
+        # Clear dependent dropdowns
+        self.folder_selector.set('');
         self.template_selector.set('')
+        self.excel_folder_selector.set('');
+        self.excel_template_selector.set('')
 
     def _on_hub_selected(self, event=None):
-        """Callback when a hub is selected. Populates folders and filtered templates."""
+        """Callback when a hub is selected. Populates folders and filtered templates for BOTH screens."""
+        # Determine which hub selector triggered the event
+        if event and event.widget == self.hub_selector:
+            selected_hub_id_str = self.hub_selector.get()
+            self.excel_hub_selector.set(selected_hub_id_str)  # Sync the other dropdown
+        elif event and event.widget == self.excel_hub_selector:
+            selected_hub_id_str = self.excel_hub_selector.get()
+            self.hub_selector.set(selected_hub_id_str)  # Sync the other dropdown
+        else:  # Fallback for programmatic call
+            selected_hub_id_str = self.hub_selector.get()
+
         try:
-            selected_hub_id = int(self.hub_selector.get())
+            selected_hub_id = int(selected_hub_id_str)
         except (ValueError, TypeError):
             return
 
@@ -140,20 +186,24 @@ class MainApplication(ttk.Frame):
 
         # --- Populate Folders ---
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
-        # Add the Hub itself as the root option
         folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
         folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
+
         self.folder_selector['values'] = folder_display_list
+        self.excel_folder_selector['values'] = folder_display_list
 
         # --- Filter and Populate Templates ---
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
 
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
-        template_titles = [t.get('title') for t in compatible_templates]
+        template_titles = sorted(list(set([t.get('title') for t in compatible_templates])))
 
-        self.template_selector['values'] = sorted(list(set(template_titles)))
-        self.log_to_console(f"✅ Found {len(folders)} folders and {len(template_titles)} compatible templates.")
+        self.template_selector['values'] = template_titles
+        self.excel_template_selector['values'] = template_titles
+
+        self.log_to_console(
+            f"✅ Found {len(folder_display_list) - 1} folders and {len(template_titles)} compatible templates.")
 
     def _select_file(self):
         filepath = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")))
@@ -162,6 +212,9 @@ class MainApplication(ttk.Frame):
 
     def _upload_file(self):
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
+
+    def _create_validated_excel(self):
+        messagebox.showinfo("Not Implemented", "This will eventually create a validated Excel file.")
 
     def open_config_window(self):
         config_win = config_window.ConfigWindow(self, self.app_state)
