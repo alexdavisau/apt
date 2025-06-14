@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox, filedialog
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-from utils import alation_lookup, api_client
+from utils import alation_lookup, api_client, excel_writer  # Import the new excel_writer
 
 
 class MainApplication(ttk.Frame):
@@ -51,7 +51,7 @@ class MainApplication(ttk.Frame):
         main_container.grid(row=0, column=0, sticky="new")
         self.main_menu_frame = ttk.Frame(main_container)
         self.uploader_frame = ttk.Frame(main_container)
-        self.excel_creator_frame = ttk.Frame(main_container)  # Added frame for excel creator
+        self.excel_creator_frame = ttk.Frame(main_container)
 
         self.main_menu_frame.grid(row=0, column=0, sticky="nsew")
         self.uploader_frame.grid(row=0, column=0, sticky="nsew")
@@ -154,12 +154,11 @@ class MainApplication(ttk.Frame):
             hub_ids = sorted(list(
                 set(doc['document_hub_id'] for doc in self.all_documents if doc.get('document_hub_id') is not None)))
             self.hub_selector['values'] = hub_ids
-            self.excel_hub_selector['values'] = hub_ids  # Also populate the excel creator hub selector
+            self.excel_hub_selector['values'] = hub_ids
             self.log_to_console(f"✅ Found {len(hub_ids)} unique Document Hub IDs. Please select one.")
         else:
             self.log_to_console("❌ No documents found, cannot populate Hub IDs.")
 
-        # Clear dependent dropdowns
         self.folder_selector.set('');
         self.template_selector.set('')
         self.excel_folder_selector.set('');
@@ -167,15 +166,14 @@ class MainApplication(ttk.Frame):
 
     def _on_hub_selected(self, event=None):
         """Callback when a hub is selected. Populates folders and filtered templates for BOTH screens."""
-        # Determine which hub selector triggered the event
         if event and event.widget == self.hub_selector:
             selected_hub_id_str = self.hub_selector.get()
-            self.excel_hub_selector.set(selected_hub_id_str)  # Sync the other dropdown
+            self.excel_hub_selector.set(selected_hub_id_str)
         elif event and event.widget == self.excel_hub_selector:
             selected_hub_id_str = self.excel_hub_selector.get()
-            self.hub_selector.set(selected_hub_id_str)  # Sync the other dropdown
-        else:  # Fallback for programmatic call
-            selected_hub_id_str = self.hub_selector.get()
+            self.hub_selector.set(selected_hub_id_str)
+        else:
+            selected_hub_id_str = self.hub_selector.get() or self.excel_hub_selector.get()
 
         try:
             selected_hub_id = int(selected_hub_id_str)
@@ -183,8 +181,6 @@ class MainApplication(ttk.Frame):
             return
 
         self.log_to_console(f"--- Populating folders and templates for Hub ID: {selected_hub_id} ---")
-
-        # --- Populate Folders ---
         folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id, self.log_to_console)
         folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
         folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
@@ -192,10 +188,8 @@ class MainApplication(ttk.Frame):
         self.folder_selector['values'] = folder_display_list
         self.excel_folder_selector['values'] = folder_display_list
 
-        # --- Filter and Populate Templates ---
         docs_in_hub = [doc for doc in self.all_documents if doc.get('document_hub_id') == selected_hub_id]
         template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
-
         compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
         template_titles = sorted(list(set([t.get('title') for t in compatible_templates])))
 
@@ -214,7 +208,34 @@ class MainApplication(ttk.Frame):
         messagebox.showinfo("In Progress", "This will eventually trigger the upload process.")
 
     def _create_validated_excel(self):
-        messagebox.showinfo("Not Implemented", "This will eventually create a validated Excel file.")
+        """Finds the selected template, asks for a save location, and creates the Excel file."""
+        selected_template_title = self.excel_template_selector.get()
+        if not selected_template_title:
+            messagebox.showwarning("Selection Required", "Please select a template first.", parent=self)
+            return
+
+        # Find the full template details from the master list
+        template_details = next((t for t in self.all_templates if t.get('title') == selected_template_title), None)
+
+        if not template_details:
+            messagebox.showerror("Error", f"Could not find details for template '{selected_template_title}'.",
+                                 parent=self)
+            return
+
+        # Ask user where to save the file
+        output_path = filedialog.asksaveasfilename(
+            title="Save Validated Excel File",
+            defaultextension=".xlsx",
+            filetypes=[("Excel Workbook", "*.xlsx")],
+            initialfile=f"{selected_template_title}_upload.xlsx"
+        )
+
+        if not output_path:
+            self.log_to_console("Operation cancelled by user.")
+            return
+
+        # Call the utility function to create the file
+        excel_writer.create_template_excel(template_details, output_path, self.log_to_console)
 
     def open_config_window(self):
         config_win = config_window.ConfigWindow(self, self.app_state)
