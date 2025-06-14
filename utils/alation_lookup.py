@@ -8,6 +8,12 @@ from utils import api_client  # Import the api_client to use its functions
 logger = logging.getLogger(__name__)
 
 
+def get_all_documents(config: dict, log_callback=print, force_fetch: bool = False) -> list:
+    """Convenience function to fetch all documents via the api_client."""
+    log_callback("Fetching all documents for lookup purposes...")
+    return api_client.get_all_documents(config, log_callback=log_callback, force_api_fetch=force_fetch)
+
+
 def get_document_hubs(config: dict, log_callback=print) -> list:
     """
     Fetches all documents from the API and filters them to find Document Hubs.
