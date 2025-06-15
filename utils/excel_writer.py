@@ -4,20 +4,14 @@ import openpyxl
 from tkinter import messagebox
 
 
-def create_template_excel(template_details: dict, hub_id: int, folder_id: int, output_path: str, log_callback=print):
+def create_template_excel(headers: list, hub_id: int, folder_id: int, template_id: int, output_path: str,
+                          log_callback=print):
     """
-    Creates an Excel file with headers based on an Alation template's custom fields
-    and includes a hidden sheet with metadata.
+    Creates an Excel file with a given list of headers and includes metadata.
     """
-    # The custom fields are on the template object itself.
-    custom_fields = template_details.get('custom_fields', [])
-    if not custom_fields:
-        # CORRECTED: Removed the 'parent' argument which caused the NameError
+    if not headers:
         messagebox.showwarning("Warning", "The selected template has no custom fields to create an Excel file from.")
         return
-
-    headers = [field.get('name', 'Unnamed Field') for field in custom_fields]
-    template_id = template_details.get('id')
 
     try:
         workbook = openpyxl.Workbook()

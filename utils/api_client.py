@@ -76,3 +76,29 @@ def get_all_templates(config: dict, log_callback=print, force_api_fetch: bool = 
         return templates
 
     return []
+
+
+# In utils/api_client.py
+
+def get_all_custom_fields(config: dict, log_callback=print) -> list:
+    """Fetches the master list of all custom field definitions."""
+    log_callback("🔍 Fetching all Custom Field definitions...")
+    url = f"{config['alation_url'].rstrip('/')}/integration/v2/custom_field/"
+
+    # This endpoint supports pagination, but we will assume for now <1000 fields
+    # A more robust solution would add full pagination here.
+    params = {'limit': 1000, 'skip': 0}
+
+    from utils.token_checker import refresh_access_token
+    response = _make_api_request_with_retry(
+        "GET", url, config, token_refresher=refresh_access_token,
+        params=params, log_callback=log_callback
+    )
+
+    if response and response.status_code == 200:
+        fields = response.json()
+        log_callback(f"✅ Found {len(fields)} Custom Field definitions.")
+        return fields
+    else:
+        log_callback("❌ Error fetching Custom Field definitions.")
+        return []

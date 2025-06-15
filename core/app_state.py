@@ -15,18 +15,21 @@ class AppState:
         self.config = {}
         self.is_token_valid = False
 
-        # Central data stores are simplified
+        # Central data stores
         self.all_documents = []
         self.all_templates = []
 
+        # Event to signal when the initial data load is complete
         self.data_loaded = threading.Event()
 
     def start_background_load(self):
         """Starts fetching all data from Alation in a background thread."""
         if not self.is_token_valid:
+            self.log_callback("Token not valid, skipping data load.")
             return
 
         self.log_callback("--- Starting background data load... ---")
+        self.data_loaded.clear()  # Reset the event
         thread = threading.Thread(target=self._load_data, daemon=True)
         thread.start()
 
@@ -36,4 +39,4 @@ class AppState:
         self.all_templates = api_client.get_all_templates(self.config, self.log_callback, force_api_fetch=True)
 
         self.log_callback("--- Background data load complete. ---")
-        self.data_loaded.set()
+        self.data_loaded.set()  # Signal that data is ready
