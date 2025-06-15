@@ -21,14 +21,19 @@ class DocumentUploaderWindow(tk.Toplevel):
     def _create_widgets(self):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
+        main_frame.grid_rowconfigure(0, weight=0)  # Row for selectors
+        main_frame.grid_rowconfigure(1, weight=0)  # Row for file uploader
+        main_frame.grid_rowconfigure(2, weight=0)  # Row for button
+        main_frame.grid_rowconfigure(3, weight=1)  # Row for progress bar
+        main_frame.grid_columnconfigure(0, weight=1)
 
-        # Create an instance of the reusable selector component
+        # 1. Create an instance of the reusable selector component
         self.selectors = SelectorComponent(main_frame, self.app_state)
-        self.selectors.pack(expand=True, fill="x", pady=5, anchor="n")
+        self.selectors.grid(row=0, column=0, sticky="ew")
 
-        # Add widgets specific to this feature
+        # 2. Add widgets specific to this feature
         uploader_lf = ttk.LabelFrame(main_frame, text="File", padding=10)
-        uploader_lf.pack(expand=True, fill="x", pady=5, anchor="n")
+        uploader_lf.grid(row=1, column=0, sticky="ew", pady=5)
         uploader_lf.columnconfigure(1, weight=1)
 
         ttk.Label(uploader_lf, text="File to Upload:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
@@ -36,7 +41,15 @@ class DocumentUploaderWindow(tk.Toplevel):
                                                                                       sticky=tk.EW)
         ttk.Button(uploader_lf, text="Browse...", command=self._select_file).grid(row=0, column=2, padx=5, pady=5)
 
-        ttk.Button(main_frame, text="Upload and Process File", command=self._upload_file).pack(pady=10)
+        self.upload_button = ttk.Button(main_frame, text="Upload and Process File", command=self._upload_file)
+        self.upload_button.grid(row=2, column=0, pady=10)
+
+        # 3. Add the progress bar
+        self.progress_bar = ttk.Progressbar(main_frame, mode='indeterminate')
+        self.progress_bar.grid(row=3, column=0, sticky="ew", pady=5, padx=5)
+
+        # Link the progress bar to the selector component
+        self.selectors.set_progress_bar(self.progress_bar, self.upload_button)
 
     def _select_file(self):
         filepath = filedialog.askopenfilename(filetypes=(("Excel files", "*.xlsx *.xls"), ("CSV files", "*.csv")))

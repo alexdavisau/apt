@@ -2,9 +2,10 @@
 
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
+import threading
 from core.app_state import AppState
 from ui.components.selector_component import SelectorComponent
-from utils import excel_writer
+from utils import excel_writer, visual_config_fetcher
 
 
 class TemplateGeneratorWindow(tk.Toplevel):
@@ -21,14 +22,25 @@ class TemplateGeneratorWindow(tk.Toplevel):
     def _create_widgets(self):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
+        main_frame.grid_rowconfigure(0, weight=0)  # Row for selectors
+        main_frame.grid_rowconfigure(1, weight=0)  # Row for button
+        main_frame.grid_rowconfigure(2, weight=1)  # Row for progress bar to be at bottom
+        main_frame.grid_columnconfigure(0, weight=1)
 
-        # Create an instance of the reusable selector component
+        # 1. Create an instance of the reusable selector component
         self.selectors = SelectorComponent(main_frame, self.app_state)
-        self.selectors.pack(expand=True, fill="x", anchor="n")
+        self.selectors.grid(row=0, column=0, sticky="ew")
 
-        # Add the button specific to this feature
+        # 2. Add the button specific to this feature
         self.create_button = ttk.Button(main_frame, text="Create Excel File", command=self._create_validated_excel)
-        self.create_button.pack(pady=20)
+        self.create_button.grid(row=1, column=0, pady=10)
+
+        # 3. Add the progress bar back
+        self.progress_bar = ttk.Progressbar(main_frame, mode='indeterminate')
+        self.progress_bar.grid(row=2, column=0, sticky="ew", pady=5, padx=5)
+
+        # Link the progress bar to the selector component so it can be controlled
+        self.selectors.set_progress_bar(self.progress_bar, self.create_button)
 
     def _create_validated_excel(self):
         selections = self.selectors.get_selections()
@@ -41,13 +53,10 @@ class TemplateGeneratorWindow(tk.Toplevel):
                                    parent=self)
             return
 
-        # CORRECTED LOGIC: Find the visual config object from the list loaded by the selector component
         visual_config_obj = next((vc for vc in self.selectors.visual_configs if vc.get('id') == template_id), None)
 
         if not visual_config_obj:
-            messagebox.showerror("Error",
-                                 f"Could not find Visual Config for Template ID {template_id}. This can happen if the Visual Config ID does not match the Template ID.",
-                                 parent=self)
+            messagebox.showerror("Error", f"Could not find Visual Config for Template ID {template_id}.", parent=self)
             return
 
         output_path = filedialog.asksaveasfilename(

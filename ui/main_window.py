@@ -4,9 +4,9 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 from core.app_state import AppState
 from ui import config_window, misc_tools_window
-# CORRECTED: Import the new window classes directly
-from ui.features.template_generator_window import TemplateGeneratorWindow
-from ui.features.document_uploader_window import DocumentUploaderWindow
+# Import our feature windows
+from ui.features import template_generator_window
+from ui.features import document_uploader_window
 
 
 class MainApplication(ttk.Frame):
@@ -16,6 +16,7 @@ class MainApplication(ttk.Frame):
         super().__init__(parent, padding="10")
         self.parent = parent
 
+        # The AppState is passed the log_to_console method, which must exist
         self.app_state = AppState(log_callback=self.log_to_console)
         self.app_state.config = config
         self.app_state.is_token_valid = is_token_valid
@@ -71,13 +72,11 @@ class MainApplication(ttk.Frame):
 
     def open_template_generator(self):
         """Opens the Template Generator feature window."""
-        # CORRECTED: Call the class directly
-        self._open_feature_window(TemplateGeneratorWindow)
+        self._open_feature_window(template_generator_window.TemplateGeneratorWindow)
 
     def open_document_uploader(self):
         """Opens the Document Uploader feature window."""
-        # CORRECTED: Call the class directly
-        self._open_feature_window(DocumentUploaderWindow)
+        self._open_feature_window(document_uploader_window.DocumentUploaderWindow)
 
     def open_config_window(self):
         win = config_window.ConfigWindow(self, self.app_state)
@@ -87,9 +86,13 @@ class MainApplication(ttk.Frame):
         win = misc_tools_window.MiscToolsWindow(self, self.app_state)
         win.grab_set()
 
+    # --- START FIX ---
+    # This method was missing after the refactor.
     def log_to_console(self, message):
+        """Appends a message to the log console in a thread-safe way."""
         self.status_bar.config(text=message)
         self.log_console.configure(state='normal')
         self.log_console.insert(tk.END, message + '\n')
         self.log_console.configure(state='disabled')
         self.log_console.see(tk.END)
+    # --- END FIX ---
