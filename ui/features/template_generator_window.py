@@ -11,7 +11,7 @@ class TemplateGeneratorWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Generate Excel from Template")
-        self.geometry("700x350")
+        self.geometry("700x320")  # Adjusted size
         self.transient(parent)
         self.grab_set()
 
@@ -22,13 +22,14 @@ class TemplateGeneratorWindow(tk.Toplevel):
         main_frame = ttk.Frame(self, padding=10)
         main_frame.pack(expand=True, fill="both")
 
-        # Create the action button first so it can be passed to the selector
+        controls_lf = ttk.LabelFrame(main_frame, text="Options", padding=10)
+        controls_lf.pack(fill="x", expand=False)
+
         self.create_button = ttk.Button(main_frame, text="Create Excel File", command=self._create_validated_excel,
                                         state="disabled")
 
-        # Create the selector component and pass it the action button
-        self.selectors = SelectorComponent(main_frame, self.app_state, action_button=self.create_button)
-        self.selectors.pack(expand=True, fill="x", anchor="n")
+        self.selectors = SelectorComponent(controls_lf, self.app_state, action_button=self.create_button)
+        self.selectors.pack(expand=True, fill="both")
 
         self.create_button.pack(pady=20)
 
@@ -40,7 +41,8 @@ class TemplateGeneratorWindow(tk.Toplevel):
         all_templates = selections.get("all_templates")
 
         if not all([hub_id, folder_id, template_id]):
-            messagebox.showwarning("Selection Required", "Please select a Hub, Folder, and Template.", parent=self)
+            messagebox.showwarning("Selection Required", "Please select a Hub, Folder, and Template first.",
+                                   parent=self)
             return
 
         template_details = next((t for t in all_templates if t.get('id') == template_id), None)

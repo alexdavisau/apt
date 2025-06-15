@@ -10,7 +10,7 @@ class DocumentUploaderWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Upload Documents")
-        self.geometry("700x400")
+        self.geometry("700x420")  # Adjusted size
         self.transient(parent)
         self.grab_set()
 
@@ -25,11 +25,13 @@ class DocumentUploaderWindow(tk.Toplevel):
         self.upload_button = ttk.Button(main_frame, text="Upload and Process File", command=self._upload_file,
                                         state="disabled")
 
-        self.selectors = SelectorComponent(main_frame, self.app_state, action_button=self.upload_button)
-        self.selectors.pack(expand=True, fill="x", pady=5, anchor="n")
+        selectors_lf = ttk.LabelFrame(main_frame, text="Selections", padding=10)
+        selectors_lf.pack(fill="x", expand=False, pady=5)
+        self.selectors = SelectorComponent(selectors_lf, self.app_state, action_button=self.upload_button)
+        self.selectors.pack(expand=True, fill="both")
 
         uploader_lf = ttk.LabelFrame(main_frame, text="File", padding=10)
-        uploader_lf.pack(expand=True, fill="x", pady=5, anchor="n")
+        uploader_lf.pack(fill="x", expand=False, pady=5)
         uploader_lf.columnconfigure(1, weight=1)
 
         ttk.Label(uploader_lf, text="File to Upload:").grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)

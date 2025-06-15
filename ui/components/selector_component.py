@@ -10,20 +10,18 @@ from utils import alation_lookup, api_client
 class SelectorComponent(ttk.Frame):
     """A reusable component for selecting Hub, Folder, and Template with threaded data loading."""
 
-    def __init__(self, parent, app_state: AppState, action_button: ttk.Button):
+    def __init__(self, parent, app_state: AppState, action_button: ttk.Button = None):
         super().__init__(parent, padding=10)
         self.app_state = app_state
         self.action_button = action_button
 
-        # Data stores
         self.all_documents = []
         self.all_templates = []
         self.folders_in_hub = []
 
         self._create_widgets()
 
-        if self.app_state.is_token_valid:
-            self.after(100, self.start_threaded_load)
+        self.after(100, self.start_threaded_load)
 
     def _create_widgets(self):
         self.columnconfigure(1, weight=1)
@@ -66,7 +64,7 @@ class SelectorComponent(ttk.Frame):
 
     def _load_data_in_background(self):
         """(Worker Thread) Fetches all necessary data from Alation APIs."""
-        self.app_state.log_callback("--- Selections: Refreshing all data... ---")
+        self.app_state.log_callback("--- Selections: Refreshing base data... ---")
         docs = alation_lookup.get_all_documents(self.app_state.config, self.app_state.log_callback, force_fetch=True)
         templates = api_client.get_all_templates(self.app_state.config, self.app_state.log_callback,
                                                  force_api_fetch=True)
@@ -103,31 +101,36 @@ class SelectorComponent(ttk.Frame):
         self.folder_selector['values'] = folder_display_list
         if folder_display_list:
             self.folder_selector.set(folder_display_list[0])
-            self._on_folder_selected()
-        else:
-            self.template_selector.set('')
-            self.template_selector['values'] = []
+        self._on_folder_selected()
 
     def _on_folder_selected(self, event=None):
-        selected_folder_str = self.folder_selector.get()
-        folder_id = self._get_id_from_selection(selected_folder_str)
+        # --- START FIX ---
+        # This logic now correctly filters templates based on the documents within the selected hub
+        try:
+            selected_hub_id = int(self.hub_selector.get())
+        except (ValueError, TypeError):
+            self.template_selector.set('')
+            self.template_selector['values'] = []
+            return
 
-        if folder_id is None: return
+        # Filter all documents to find those in the selected hub
+        docs_in_hub = [doc for doc in self.all_documents if str(doc.get('document_hub_id')) == str(selected_hub_id)]
 
-        selected_folder = next((f for f in self.folders_in_hub if f.get('id') == folder_id), None)
+        # From those documents, get the unique set of template IDs they use
+        template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
 
-        if selected_folder and selected_folder.get('template_id'):
-            template_id = selected_folder.get('template_id')
-            template_obj = next((t for t in self.all_templates if t.get('id') == template_id), None)
+        # Find the full template objects that match the IDs
+        compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
 
-            if template_obj:
-                display_name = f"{template_obj.get('title')} (ID: {template_id})"
-                self.template_selector['values'] = [display_name]
-                self.template_selector.set(display_name)
-            else:
-                self.template_selector.set(f"Unknown Template (ID: {template_id})")
+        # Create the display names for the dropdown
+        template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
+
+        self.template_selector['values'] = template_display_names
+        if template_display_names:
+            self.template_selector.set(template_display_names[0])
         else:
-            self.template_selector.set('No template assigned')
+            self.template_selector.set('')
+        # --- END FIX ---
 
     def _get_id_from_selection(self, selection_string: str) -> int:
         if not selection_string or "(ID:" not in selection_string: return None

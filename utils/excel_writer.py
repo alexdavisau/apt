@@ -12,8 +12,8 @@ def create_template_excel(template_details: dict, hub_id: int, folder_id: int, o
     # The custom fields are on the template object itself.
     custom_fields = template_details.get('custom_fields', [])
     if not custom_fields:
-        messagebox.showwarning("Warning", "The selected template has no custom fields to create an Excel file from.",
-                               parent=parent)
+        # CORRECTED: Removed the 'parent' argument which caused the NameError
+        messagebox.showwarning("Warning", "The selected template has no custom fields to create an Excel file from.")
         return
 
     headers = [field.get('name', 'Unnamed Field') for field in custom_fields]
