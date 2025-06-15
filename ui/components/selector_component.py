@@ -4,32 +4,24 @@ import tkinter as tk
 from tkinter import ttk
 import threading
 from core.app_state import AppState
-from utils import alation_lookup, api_client, visual_config_fetcher
+from utils import alation_lookup, api_client
 
 
 class SelectorComponent(ttk.Frame):
     """A reusable component for selecting Hub, Folder, and Template with threaded data loading."""
 
-    def __init__(self, parent, app_state: AppState):
+    def __init__(self, parent, app_state: AppState, action_button: ttk.Button):
         super().__init__(parent, padding=10)
         self.app_state = app_state
+        self.action_button = action_button
 
         # Data stores
         self.all_documents = []
         self.all_templates = []
-        self.visual_configs = []
-
-        # To hold references to parent widgets
-        self.progress_bar = None
-        self.action_button = None
+        self.folders_in_hub = []
 
         self._create_widgets()
 
-    def set_progress_bar(self, progress_bar, action_button):
-        """Receives the progress bar and action button from the parent window."""
-        self.progress_bar = progress_bar
-        self.action_button = action_button
-        # Now that we have the progress bar, we can start loading data
         if self.app_state.is_token_valid:
             self.after(100, self.start_threaded_load)
 
@@ -47,21 +39,27 @@ class SelectorComponent(ttk.Frame):
         ttk.Label(self, text="Folder:").grid(row=2, column=0, padx=5, pady=5, sticky=tk.W)
         self.folder_selector = ttk.Combobox(self, state="disabled")
         self.folder_selector.grid(row=2, column=1, padx=5, pady=5, sticky=tk.EW)
+        self.folder_selector.bind("<<ComboboxSelected>>", self._on_folder_selected)
 
         ttk.Label(self, text="Template:").grid(row=3, column=0, padx=5, pady=5, sticky=tk.W)
         self.template_selector = ttk.Combobox(self, state="disabled")
         self.template_selector.grid(row=3, column=1, padx=5, pady=5, sticky=tk.EW)
+
+        self.progress_bar = ttk.Progressbar(self, mode='indeterminate')
+        self.progress_bar.grid(row=4, column=0, columnspan=2, sticky="ew", pady=(10, 0))
+        self.progress_bar.grid_remove()
 
     def start_threaded_load(self):
         """Disables controls and starts fetching data in a background thread."""
         self.hub_selector.set('');
         self.folder_selector.set('');
         self.template_selector.set('')
-        for widget in [self.hub_selector, self.folder_selector, self.template_selector, self.refresh_button]:
-            widget['state'] = 'disabled'
-        if self.action_button: self.action_button['state'] = 'disabled'
+        for widget in [self.hub_selector, self.folder_selector, self.template_selector, self.refresh_button,
+                       self.action_button]:
+            if widget: widget['state'] = 'disabled'
 
-        if self.progress_bar: self.progress_bar.start(10)
+        self.progress_bar.grid()
+        self.progress_bar.start(10)
 
         thread = threading.Thread(target=self._load_data_in_background, daemon=True)
         thread.start()
@@ -72,15 +70,14 @@ class SelectorComponent(ttk.Frame):
         docs = alation_lookup.get_all_documents(self.app_state.config, self.app_state.log_callback, force_fetch=True)
         templates = api_client.get_all_templates(self.app_state.config, self.app_state.log_callback,
                                                  force_api_fetch=True)
-        v_configs = visual_config_fetcher.get_all_visual_configs(self.app_state.config, self.app_state.log_callback)
-        self.after(0, self._update_ui_with_loaded_data, docs, templates, v_configs)
+        self.after(0, self._update_ui_with_loaded_data, docs, templates)
 
-    def _update_ui_with_loaded_data(self, docs, templates, v_configs):
+    def _update_ui_with_loaded_data(self, docs, templates):
         """(Main Thread) Updates the UI after data has been fetched."""
-        if self.progress_bar: self.progress_bar.stop()
+        self.progress_bar.stop()
+        self.progress_bar.grid_remove()
         self.all_documents = docs
         self.all_templates = templates
-        self.visual_configs = v_configs
 
         if self.all_documents:
             hub_ids = sorted(list(
@@ -90,9 +87,9 @@ class SelectorComponent(ttk.Frame):
         else:
             self.app_state.log_callback("❌ Selections: No documents found.")
 
-        for widget in [self.hub_selector, self.folder_selector, self.template_selector, self.refresh_button]:
-            widget['state'] = 'readonly'
-        if self.action_button: self.action_button['state'] = 'normal'
+        for widget in [self.hub_selector, self.folder_selector, self.template_selector, self.refresh_button,
+                       self.action_button]:
+            if widget: widget['state'] = 'readonly' if isinstance(widget, ttk.Combobox) else 'normal'
 
     def _on_hub_selected(self, event=None):
         try:
@@ -100,24 +97,37 @@ class SelectorComponent(ttk.Frame):
         except (ValueError, TypeError):
             return
 
-        folders = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id,
-                                                     self.app_state.log_callback)
-        folder_display_list = [f"Hub Root (ID: {selected_hub_id})"]
-        folder_display_list.extend([f"{f.get('title')} (ID: {f.get('id')})" for f in folders])
+        self.folders_in_hub = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id,
+                                                                 self.app_state.log_callback)
+        folder_display_list = [f"{f.get('title')} (ID: {f.get('id')})" for f in self.folders_in_hub]
         self.folder_selector['values'] = folder_display_list
-        if folder_display_list: self.folder_selector.set(folder_display_list[0])
-
-        template_ids_for_hub = {vc.get('template_id') for vc in self.visual_configs if
-                                vc.get('template_id') is not None and str(vc.get('collection_type_id')) == str(
-                                    selected_hub_id)}
-        compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_for_hub]
-        template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
-
-        self.template_selector['values'] = template_display_names
-        if template_display_names:
-            self.template_selector.set(template_display_names[0])
+        if folder_display_list:
+            self.folder_selector.set(folder_display_list[0])
+            self._on_folder_selected()
         else:
             self.template_selector.set('')
+            self.template_selector['values'] = []
+
+    def _on_folder_selected(self, event=None):
+        selected_folder_str = self.folder_selector.get()
+        folder_id = self._get_id_from_selection(selected_folder_str)
+
+        if folder_id is None: return
+
+        selected_folder = next((f for f in self.folders_in_hub if f.get('id') == folder_id), None)
+
+        if selected_folder and selected_folder.get('template_id'):
+            template_id = selected_folder.get('template_id')
+            template_obj = next((t for t in self.all_templates if t.get('id') == template_id), None)
+
+            if template_obj:
+                display_name = f"{template_obj.get('title')} (ID: {template_id})"
+                self.template_selector['values'] = [display_name]
+                self.template_selector.set(display_name)
+            else:
+                self.template_selector.set(f"Unknown Template (ID: {template_id})")
+        else:
+            self.template_selector.set('No template assigned')
 
     def _get_id_from_selection(self, selection_string: str) -> int:
         if not selection_string or "(ID:" not in selection_string: return None
@@ -133,4 +143,5 @@ class SelectorComponent(ttk.Frame):
             hub_id = None
         folder_id = self._get_id_from_selection(self.folder_selector.get())
         template_id = self._get_id_from_selection(self.template_selector.get())
-        return {"hub_id": hub_id, "folder_id": folder_id, "template_id": template_id}
+        return {"hub_id": hub_id, "folder_id": folder_id, "template_id": template_id,
+                "all_templates": self.all_templates}
