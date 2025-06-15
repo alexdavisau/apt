@@ -19,8 +19,8 @@ class AppState:
         self.all_documents = []
         self.all_templates = []
         self.visual_configs = []
+        self.folders_in_hub = []  # New: to store folders for the selected hub
 
-        # State to track if data loading is complete
         self.data_loaded = threading.Event()
 
     def start_background_load(self):
