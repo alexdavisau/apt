@@ -88,36 +88,40 @@ class SelectorComponent(ttk.Frame):
                        self.action_button]:
             if widget: widget['state'] = 'readonly' if isinstance(widget, ttk.Combobox) else 'normal'
 
-    def _on_hub_selected(self, event=None):
-        """Callback when a hub is selected. Populates both folders and templates."""
-        try:
-            selected_hub_id = int(self.hub_selector.get())
-        except (ValueError, TypeError):
-            return
+        # In ui/components/selector_component.py, replace this method:
 
-        # --- START FIX ---
+        def _on_hub_selected(self, event=None):
+            """Callback when a hub is selected. Populates folders and templates."""
+            try:
+                selected_hub_id = int(self.hub_selector.get())
+            except (ValueError, TypeError):
+                return
 
-        # 1. Populate Folders for the selected Hub
-        self.folders_in_hub = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id,
-                                                                 self.app_state.log_callback)
-        folder_display_list = [f"{f.get('title')} (ID: {f.get('id')})" for f in self.folders_in_hub]
-        self.folder_selector['values'] = folder_display_list
-        if folder_display_list:
-            self.folder_selector.set(folder_display_list[0])
+            self.app_state.log_callback(f"--- Selections: Populating for Hub ID: {selected_hub_id} ---")
 
-        # 2. Populate TEMPLATES based on the selected HUB
-        docs_in_hub = [doc for doc in self.all_documents if str(doc.get('document_hub_id')) == str(selected_hub_id)]
-        template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
-        compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
-        template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
+            # 1. Populate Folders (This part is working correctly)
+            self.folders_in_hub = alation_lookup.get_folders_for_hub(self.app_state.config, selected_hub_id,
+                                                                     self.app_state.log_callback)
+            folder_display_list = [f"{f.get('title')} (ID: {f.get('id')})" for f in self.folders_in_hub]
+            self.folder_selector['values'] = folder_display_list
+            if folder_display_list:
+                self.folder_selector.set(folder_display_list[0])
 
-        self.template_selector['values'] = template_display_names
-        if template_display_names:
-            self.template_selector.set(template_display_names[0])
-        else:
-            self.template_selector.set('')
+            # 2. CORRECTED LOGIC: Filter templates based on document usage within the selected hub
+            docs_in_hub = [doc for doc in self.all_documents if str(doc.get('document_hub_id')) == str(selected_hub_id)]
+            template_ids_in_hub = {doc.get('template_id') for doc in docs_in_hub if doc.get('template_id')}
+            compatible_templates = [t for t in self.all_templates if t.get('id') in template_ids_in_hub]
 
-        # --- END FIX ---
+            template_display_names = sorted([f"{t.get('title')} (ID: {t.get('id')})" for t in compatible_templates])
+
+            self.template_selector['values'] = template_display_names
+            if template_display_names:
+                self.template_selector.set(template_display_names[0])
+            else:
+                self.template_selector.set('')
+
+            self.app_state.log_callback(
+                f"✅ Selections: Found {len(folder_display_list)} folders and {len(template_display_names)} compatible templates.")
 
     def _get_id_from_selection(self, selection_string: str) -> int:
         if not selection_string or "(ID:" not in selection_string: return None
