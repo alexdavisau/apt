@@ -11,7 +11,7 @@ class TemplateGeneratorWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Generate Excel from Template")
-        self.geometry("700x320")  # Adjusted size
+        self.geometry("700x350")
         self.transient(parent)
         self.grab_set()
 

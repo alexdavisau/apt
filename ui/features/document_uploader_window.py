@@ -10,7 +10,7 @@ class DocumentUploaderWindow(tk.Toplevel):
     def __init__(self, parent, app_state: AppState):
         super().__init__(parent)
         self.title("Upload Documents")
-        self.geometry("700x420")  # Adjusted size
+        self.geometry("700x420")
         self.transient(parent)
         self.grab_set()
 
